@@ -1,7 +1,7 @@
 Comstat
 -------
 ![Screenshot](Screenshot.png?raw=true)
-Comcast forces you to go through a pretty crappy login process until they finally show you your data usage on a simple progress bar. This project uses Eric Swanson's [Python script](comcast) to create a nice front end for your data usage that:
+Comcast forces you to go through a pretty crappy login process until they finally show you your data usage on a simple progress bar. This project uses Eric Swanson's [Python script](https://github.com/lachesis/comcast) to fetch the information from Comcast, and Comstat uses it to present a nice front end for your data usage that:
   - You can host and share with your family or roommates
   - Doesn't require a login process, just set the config file
   - Can be easily expanded upon in the future with statistics and use predictions to make something much more useful than what Comcast provides
