@@ -1,10 +1,14 @@
 Comstat
 -------
 ![Screenshot](Screenshot.png?raw=true)
-Requires Node.js and Python 3 with the requests library. Powered by Eric Swanson's [python script](comcast).
+Comcast forces you to go through a pretty crappy login process until they finally show you your data usage on a simple progress bar. This project uses Eric Swanson's [Python script](comcast) to create a nice front end for your data usage that:
+  - You can host and share with your family or roommates
+  - Doesn't require a login process, just set the config file
+  - Can be easily expanded upon in the future with statistics and use predictions to make something much more useful than what Comcast provides
 
 Usage
 -------
+Requires Node.js and Python 3 with the requests library.
 1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
 2. Rename config.example.json to config.json, and fill in your Comcast username and password. You can also set a custom port or change the interface.
 3. Run `npm install` to install node dependencies.
