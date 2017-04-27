@@ -36,7 +36,13 @@ header {
 }
 
 @media (max-width: 575px) {
+    .display-3 {
+        text-align: center;
+    }
+
     .display-3 .fa-bar-chart {
         display: none;
     }
+
+    
 }
