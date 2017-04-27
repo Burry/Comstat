@@ -1,0 +1,42 @@
+header {
+    border-radius: 0;
+    padding: 4rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.display-3 {
+    font-size: 3rem !important;
+}
+
+#data,
+#reload {
+    display: none;
+}
+
+#reload {
+    width: 100%;
+    right: 15px;
+    cursor: pointer;
+}
+
+#data_progress {
+    display: none;
+    background: #fff !important;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    border: solid 1px #ccc;
+}
+
+.progress-bar {
+    height: 2rem !important;
+}
+
+.half-transparent {
+    opacity: 0.5;
+}
+
+@media (max-width: 575px) {
+    .display-3 .fa-bar-chart {
+        display: none;
+    }
+}
