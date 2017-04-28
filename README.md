@@ -1,7 +1,6 @@
 Comstat
 -------
 Comcast forces you to go through a pretty crappy login process until they finally show you your data usage on a simple progress bar. This project uses Eric Swanson's [Python script](https://github.com/lachesis/comcast) to fetch the information from Comcast and then presents it in a nice front-end which...
-
   - You can host and share with your family or roommates
   - Doesn't require a login process, just set the config file
   - Can be easily expanded upon in the future with statistics and use predictions to make something much more useful than what Comcast provides
@@ -25,16 +24,16 @@ You should then be able to access Comstat through http://localhost:3234 or at wh
 
 Config Values
 -------
-- `port` (Optional) Port to run the server on
+- `port`: (Optional) Port to run the server on
     - default: 3234
-- `interface` (Optional) Routing interface
+- `interface`: (Optional) Routing interface
     - Set to 0.0.0.0 to access from other machines
     - default: localhost
-- `comcastUsername` Your Comcast username
-- `comcastPassword` Your Comcast password
+- `comcastUsername`: Your Comcast username
+- `comcastPassword`: Your Comcast password
 - `title` (Optional) Set a custom app title
     - default: Comstat
-- `icon` (Optional) Specify the class name of a [FontAwesome icon](http://fontawesome.io/icons/) to replace the default logo
+- `icon`: (Optional) Specify the class name of a [FontAwesome icon](http://fontawesome.io/icons/) to replace the default logo
     - (e.g. `fa-bar-chart`)
 
 License
