@@ -1,0 +1,47 @@
+header {
+	padding: 4rem 2rem;
+	margin-bottom: 2rem;
+	.logo {
+		height: 60px;
+		margin-top: -10px;
+	}
+	.display-4 {
+		.logo {
+			margin-right: 15px;
+		}
+		.fa {
+			margin-right: 15px;
+		}
+	}
+	#data {
+		display: none;
+	}
+	#reload {
+		display: none;
+		cursor: pointer;
+	}
+	.progress {
+		display: none;
+		background: #fff !important;
+		font-size: 1.25rem;
+		line-height: 2rem;
+		border: solid 1px #ccc;
+	}
+	.progress-bar {
+		height: 2rem !important;
+	}
+}
+.half-transparent {
+	opacity: 0.5;
+}
+@media(max-width: 575px) {
+	header .display-4 {
+		font-size: 2.5rem !important;
+		.fa {
+			display: none;
+		}
+		.logo {
+			display: none;
+		}
+	}
+}
