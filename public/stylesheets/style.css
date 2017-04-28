@@ -4,8 +4,9 @@ header {
     margin-bottom: 2rem;
 }
 
-.display-3 {
-    font-size: 3rem !important;
+header .logo {
+    height: 60px;
+    margin-top: -10px;
 }
 
 #data,
@@ -36,13 +37,8 @@ header {
 }
 
 @media (max-width: 575px) {
-    .display-3 {
-        text-align: center;
-    }
-
-    .display-3 .fa-bar-chart {
+    header .display-4 .fa,
+    header .display-4 .logo {
         display: none;
     }
-
-    
 }

@@ -5,8 +5,11 @@ block content
         .container
             .row
                 .col-12
-                    h1.display-3
-                        i.fa.fa-bar-chart(aria-hidden='true')
+                    h1.display-4
+                        if icon
+                            i.fa(class=icon, aria-hidden='true')
+                        else
+                            img.logo(src='images/logo.svg')
                         | &nbsp;
                         =title
             .row#loader

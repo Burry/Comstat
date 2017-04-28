@@ -2,5 +2,7 @@
     "port": 3234,
     "interface": "0.0.0.0",
     "comcastUsername": "",
-    "comcastPassword": ""
+    "comcastPassword": "",
+    "customTitle": "",
+    "customIcon": ""
 }

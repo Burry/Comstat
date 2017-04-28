@@ -15,6 +15,10 @@ var app = express();
 app.set('username', config.comcastUsername || null);
 app.set('password', config.comcastPassword || null);
 
+// custom branding options
+app.set('customTitle', config.customTitle || 'Comstat');
+app.set('customIcon', config.customIcon || '');
+
 // port and interface setup
 var port = config.port || 3234;
 var interface = config.interface || null;
