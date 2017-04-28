@@ -69,15 +69,11 @@ function loadComcastQuery() {
 
 function reloadComcastQuery() {
     $(".fa-refresh").addClass("fa-spin");
-    $("#percent").addClass("half-transparent");
-    $("#details").addClass("half-transparent");
-    $(".progress-bar").addClass("half-transparent");
+    $("header .row").addClass("half-transparent");
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
         $(".fa-refresh").removeClass("fa-spin");
-        $("#percent").removeClass("half-transparent");
-        $("#details").removeClass("half-transparent");
-        $(".progress-bar").removeClass("half-transparent");
+        $("header .row").removeClass("half-transparent");
     });
 }
 
