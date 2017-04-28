@@ -18,11 +18,10 @@ nav {
 }
 
 header {
-	.lead {
-		 .fa-spin {
-			 margin-right: 5px;
-		 }
-	}
+	 .fa-spin,
+	 .fa-calendar {
+		 margin-right: 5px;
+	 }
 	#data,
 	#data_overage_charges_row,
 	#date {
