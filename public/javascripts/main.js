@@ -70,10 +70,12 @@ function loadComcastQuery() {
 function reloadComcastQuery() {
     $(".fa-refresh").addClass("fa-spin");
     $("header .row").addClass("half-transparent");
+    $(".progress-bar").addClass("half-transparent");
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
         $(".fa-refresh").removeClass("fa-spin");
         $("header .row").removeClass("half-transparent");
+        $(".progress-bar").removeClass("half-transparent");
     });
 }
 
