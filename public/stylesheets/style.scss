@@ -1,24 +1,25 @@
-header {
-	padding: 4rem 2rem;
-	margin-bottom: 2rem;
-	.logo {
-		height: 60px;
-		margin-top: -10px;
-	}
-	.display-4 {
+nav {
+	padding: .5rem 0rem !important;
+	.navbar-brand {
 		.logo {
-			margin-right: 15px;
+			height: 30px;
+			display: inline-block !important;
 		}
+		.logo,
 		.fa {
-			margin-right: 15px;
+			margin-right: 10px;
 		}
-	}
-	#data {
-		display: none;
 	}
 	#reload {
 		display: none;
 		cursor: pointer;
+		text-align: center;
+	}
+}
+
+header {
+	#data {
+		display: none;
 	}
 	.progress {
 		display: none;
@@ -31,17 +32,7 @@ header {
 		height: 2rem !important;
 	}
 }
+
 .half-transparent {
 	opacity: 0.5;
-}
-@media(max-width: 575px) {
-	header .display-4 {
-		font-size: 2.5rem !important;
-		.fa {
-			display: none;
-		}
-		.logo {
-			display: none;
-		}
-	}
 }
