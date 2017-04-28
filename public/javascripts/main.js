@@ -14,6 +14,13 @@ function overageAlert(data) {
     $("#data_overage_charges_row").css("display", "initial");
 }
 
+function daysRemaining() {
+    var date = new Date();
+    var firstofNextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+    var timeDiff = Math.abs(firstofNextMonth.getTime() - date.getTime());
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+}
+
 function updateStats(data) {
     var percent = 100 * data.used / data.total;
     var percentInt = Math.round(percent);
@@ -40,6 +47,7 @@ function updateStats(data) {
     $("#data_used").html(data.used);
     $("#data_total").html(data.total);
     $("#data_units").html(data.unit);
+    $("#days_remaining").html(daysRemaining());
     $(".progress-bar").html(percentInt + "%");
     $(".progress-bar").css("width", percent + "%");
     $(".progress-bar").addClass(progressBarBackground);
@@ -50,6 +58,7 @@ function loadComcastQuery() {
         updateStats(JSON.parse(data));
         $("#loader").hide();
         $("#data").css("display", "block");
+        $("#date").css("display", "block");
         $("#data_progress").css("display", "block");
         $("#reload").css("display", "block");
     });
@@ -60,6 +69,8 @@ function reloadComcastQuery() {
     $("#data_used").addClass("half-transparent");
     $("#data_total").addClass("half-transparent");
     $("#data_remainder").addClass("half-transparent");
+    $("#data_overage_charges").addClass("half-transparent");
+    $("#days_remaining").addClass("half-transparent");
     $(".progress-bar").addClass("half-transparent");
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
@@ -67,6 +78,8 @@ function reloadComcastQuery() {
         $("#data_used").removeClass("half-transparent");
         $("#data_total").removeClass("half-transparent");
         $("#data_remainder").removeClass("half-transparent");
+        $("#data_overage_charges").removeClass("half-transparent");
+        $("#days_remaining").removeClass("half-transparent");
         $(".progress-bar").removeClass("half-transparent");
     });
 }

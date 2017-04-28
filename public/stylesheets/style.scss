@@ -24,11 +24,15 @@ header {
 		 }
 	}
 	#data,
-	#data_overage_charges_row {
+	#data_overage_charges_row,
+	#date {
 		display: none;
 	}
 	#data_overage_charges_row {
 		font-weight: bold;
+	}
+	#date {
+		text-align: right;
 	}
 	.progress {
 		display: none;
