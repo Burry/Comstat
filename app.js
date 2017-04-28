@@ -16,19 +16,18 @@ app.set('username', config.comcastUsername || null);
 app.set('password', config.comcastPassword || null);
 
 // custom branding options
-app.set('customTitle', config.customTitle || 'Comstat');
-app.set('customIcon', config.customIcon || '');
+app.set('customTitle', config.title || 'Comstat');
+app.set('customIcon', config.icon || null);
 
 // port and interface setup
 var port = config.port || 3234;
-var interface = config.interface || null;
+var interface = config.interface || 'localhost';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,6 +55,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, interface);
+app.listen(port, interface, function() {
+    console.log(app.get('customTitle') + ' is running at ' + 'http://' + interface + ':' + port);
+});
 
 module.exports = app;

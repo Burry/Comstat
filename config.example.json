@@ -1,8 +1,8 @@
 {
     "port": 3234,
-    "interface": "0.0.0.0",
+    "interface": "",
     "comcastUsername": "",
     "comcastPassword": "",
-    "customTitle": "",
-    "customIcon": ""
+    "title": "",
+    "icon": ""
 }
