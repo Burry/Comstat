@@ -2,6 +2,7 @@ function normalAlert(data) {
     $("#data").css("color", "#292b2c");
     $("#data_remainder").html(data.total - data.used);
     $("#data_remainder_label").html('remaining');
+    $("#data_overage_charges_row").css("display", "none");
 }
 
 function overageAlert(data) {
