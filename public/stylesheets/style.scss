@@ -16,33 +16,42 @@ nav {
 		}
 	}
 	#reload {
-		display: none;
 		cursor: pointer;
 		text-align: center;
 	}
 }
 
 header {
-	 .fa-spin,
-	 .fa-calendar {
-		 margin-right: 5px;
-	 }
-	#data,
-	#data_overage_charges_row,
-	#date {
+	.lead {
+		margin: 0 auto;
+		.fa-spin {
+			margin-right: 5px;
+		}
+	}
+	#percent {
+		font-size: 5rem;
+		font-weight: 200;
+		line-height: 0.8;
+		margin-bottom: 15px;
+	}
+	#details {
+		text-align: right;
+		position: absolute;
+	    bottom: -5px;
+		right: 15px;
+	}
+	.preload,
+	#data_overage_charges_row {
 		display: none;
 	}
 	#data_overage_charges_row {
 		font-weight: bold;
 	}
-	#date {
-		text-align: right;
-	}
 	.progress {
-		display: none;
 		background: #fff !important;
 		font-size: 1.25rem;
 		line-height: 2rem;
+		text-align: right;
 	}
 	.progress-bar {
 		height: 2rem !important;
@@ -51,4 +60,10 @@ header {
 
 .half-transparent {
 	opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+	#percent {
+		font-size: 5.5rem;
+	}
 }

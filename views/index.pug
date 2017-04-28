@@ -12,7 +12,7 @@ block content
                     img.logo.align-top(src='images/logo.svg', draggable='false')
                 =title
             .collapse.navbar-collapse.justify-content-end
-                button#reload.btn.btn-secondary(type='button')
+                button#reload.btn.btn-secondary.preload(type='button')
                     i.fa.fa-refresh(aria-hidden='true')
 
     header.jumbotron.jumbotron-fluid
@@ -20,10 +20,11 @@ block content
             p.lead#loader
                 i.fa.fa-spin.fa-circle-o-notch(aria-hidden='true')
                 |  Querying Comcast
-            .row
+            .row.preload
                 .col-6
-                    p#data
-                        | Used&nbsp;
+                    h1#percent
+                .col-6
+                    p#details
                         span#data_used
                         | /
                         span#data_total
@@ -34,15 +35,11 @@ block content
                         span#data_units
                         | &nbsp;
                         span#data_remainder_label
-                        span#data_overage_charges_row
-                            br
-                            | + $
-                            span#data_overage_charges
-                .col-6
-                    p#date
                         br
-                        i.fa.fa-calendar(aria-hidden='true')
+                        span#data_overage_charges_row + $
+                            span#data_overage_charges
+                            br
                         span#days_remaining
                         |  days until reset
-            #data_progress.progress
-                .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 75%')
+            #data_progress.progress.preload
+                .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')

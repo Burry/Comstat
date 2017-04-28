@@ -1,5 +1,5 @@
 function normalAlert(data) {
-    $("#data").css("color", "#292b2c");
+    $("#details").css("color", "#292b2c");
     $("#data_remainder").html(data.total - data.used);
     $("#data_remainder_label").html('remaining');
     $("#data_overage_charges_row").css("display", "none");
@@ -8,7 +8,7 @@ function normalAlert(data) {
 function overageAlert(data) {
     var overageCost = Math.ceil((data.used - data.total + 1) / 50) * 10;
     overageCost = overageCost >= 200 ? 200 : overageCost;
-    $("#data").css("color", "#D71328");
+    $("#details").css("color", "#D71328");
     $("#data_remainder").html(data.used - data.total);
     $("#data_remainder_label").html('over limit');
     $("#data_overage_charges").html(overageCost);
@@ -45,40 +45,38 @@ function updateStats(data) {
     } else {
         normalAlert(data);
     }
+    $("#percent").html(percentInt + "%");
     $("#data_used").html(data.used);
     $("#data_total").html(data.total);
     $("#data_units").html(data.unit);
     $("#days_remaining").html(daysRemaining());
-    $(".progress-bar").html(percentInt + "%");
     $(".progress-bar").css("width", percent + "%");
     $(".progress-bar").addClass(progressBarBackground);
+}
+
+function presentDetails() {
+    $("#loader").hide();
+    $(".preload").show();
+    $(".row").css("display", "flex");
 }
 
 function loadComcastQuery() {
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
-        $("#loader").hide();
-        $("#data").css("display", "block");
-        $("#date").css("display", "block");
-        $("#data_progress").css("display", "block");
-        $("#reload").css("display", "block");
+        presentDetails();
     });
 }
 
 function reloadComcastQuery() {
     $(".fa-refresh").addClass("fa-spin");
-    $("#data_used").addClass("half-transparent");
-    $("#data_total").addClass("half-transparent");
-    $("#data_remainder").addClass("half-transparent");
-    $("#data_overage_charges").addClass("half-transparent");
+    $("#percent").addClass("half-transparent");
+    $("#details").addClass("half-transparent");
     $(".progress-bar").addClass("half-transparent");
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
         $(".fa-refresh").removeClass("fa-spin");
-        $("#data_used").removeClass("half-transparent");
-        $("#data_total").removeClass("half-transparent");
-        $("#data_remainder").removeClass("half-transparent");
-        $("#data_overage_charges").removeClass("half-transparent");
+        $("#percent").removeClass("half-transparent");
+        $("#details").removeClass("half-transparent");
         $(".progress-bar").removeClass("half-transparent");
     });
 }
