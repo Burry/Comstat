@@ -6,11 +6,12 @@ function normalAlert(data) {
 
 function overageAlert(data) {
     var overageCost = Math.ceil((data.used - data.total + 1) / 50) * 10;
+    overageCost = > 200 ? 200 : overageCost;
     $("#data").css("color", "#D71328");
     $("#data_remainder").html(data.used - data.total);
     $("#data_remainder_label").html('over limit');
     $("#data_overage_charges").html(overageCost);
-    $("#data_overage_charges_row").css("display", "block");
+    $("#data_overage_charges_row").css("display", "initial");
 }
 
 function updateStats(data) {
