@@ -6,7 +6,7 @@ function normalAlert(data) {
 
 function overageAlert(data) {
     var overageCost = Math.ceil((data.used - data.total + 1) / 50) * 10;
-    overageCost >= 200 ? 200 : overageCost;
+    overageCost = overageCost >= 200 ? 200 : overageCost;
     $("#data").css("color", "#D71328");
     $("#data_remainder").html(data.used - data.total);
     $("#data_remainder_label").html('over limit');
