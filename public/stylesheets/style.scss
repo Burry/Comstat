@@ -18,6 +18,11 @@ nav {
 }
 
 header {
+	.lead {
+		 .fa-spin {
+			 margin-right: 5px;
+		 }
+	}
 	#data,
 	#data_overage_charges_row {
 		display: none;
