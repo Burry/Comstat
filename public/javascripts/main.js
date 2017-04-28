@@ -70,7 +70,6 @@ function reloadComcastQuery() {
     $("#data_total").addClass("half-transparent");
     $("#data_remainder").addClass("half-transparent");
     $("#data_overage_charges").addClass("half-transparent");
-    $("#days_remaining").addClass("half-transparent");
     $(".progress-bar").addClass("half-transparent");
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
@@ -79,7 +78,6 @@ function reloadComcastQuery() {
         $("#data_total").removeClass("half-transparent");
         $("#data_remainder").removeClass("half-transparent");
         $("#data_overage_charges").removeClass("half-transparent");
-        $("#days_remaining").removeClass("half-transparent");
         $(".progress-bar").removeClass("half-transparent");
     });
 }
