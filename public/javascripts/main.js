@@ -1,18 +1,25 @@
 function updateStats(data) {
     var res = JSON.parse(data);
     var percent = 100 * res.used / res.total;
+    var percentInt = Math.round(percent);
+    var progressBarClasses = $(".progress-bar").attr("class").split(/\s+/);
     var progressBarBackground;
-    if (percent >= 50 && percent < 70) {
+    if (percentInt >= 50 && percentInt < 70) {
         progressBarBackground = 'bg-success';
-    } else if (percent >= 70 && percent < 90) {
+    } else if (percentInt >= 70 && percentInt < 90) {
         progressBarBackground = 'bg-warning';
-    } else if (percent >= 90) {
+    } else if (percentInt >= 90) {
         progressBarBackground = 'bg-danger';
     }
+    $.each(progressBarClasses, function(index, item) {
+        if (item.startsWith('bg-')) {
+            $(".progress-bar").removeClass(item);
+        }
+    });
     $("#data_used").html(res.used);
     $("#data_total").html(res.total);
     $("#data_remaining").html(res.total - res.used);
-    $(".progress-bar").html(Math.round(percent) + "%");
+    $(".progress-bar").html(percentInt + "%");
     $(".progress-bar").css("width", percent + "%");
     $(".progress-bar").addClass(progressBarBackground);
 }
