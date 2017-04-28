@@ -18,8 +18,12 @@ nav {
 }
 
 header {
-	#data {
+	#data,
+	#data_overage_charges_row {
 		display: none;
+	}
+	#data_overage_charges_row {
+		font-weight: bold;
 	}
 	.progress {
 		display: none;
