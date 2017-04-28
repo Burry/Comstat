@@ -1,6 +1,10 @@
 nav {
 	padding: .5rem 0rem !important;
 	.navbar-brand {
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
 		.logo {
 			height: 30px;
 			display: inline-block !important;
