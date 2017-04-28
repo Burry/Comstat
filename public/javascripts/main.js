@@ -5,7 +5,7 @@ function overageAlert(data) {
 }
 
 function updateStats(data) {
-    var percent = 100 * data.used / data.total < 100 ? 100 * data.used / data.total : 100;
+    var percent = 100 * data.used / data.total;
     var percentInt = Math.round(percent);
     var progressBarClasses = $(".progress-bar").attr("class").split(/\s+/);
     var progressBarBackground;
@@ -21,7 +21,8 @@ function updateStats(data) {
             $(".progress-bar").removeClass(item);
         }
     });
-    if (percent == 100) {
+    if (percent >= 100) {
+        percent = 100;
         overageAlert(data);
     } else {
         $("#data_remaining").html(data.total - data.used);
@@ -29,6 +30,7 @@ function updateStats(data) {
     }
     $("#data_used").html(data.used);
     $("#data_total").html(data.total);
+    $("#data_units").html(data.unit);
     $(".progress-bar").html(percentInt + "%");
     $(".progress-bar").css("width", percent + "%");
     $(".progress-bar").addClass(progressBarBackground);
