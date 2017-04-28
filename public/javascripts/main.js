@@ -1,6 +1,11 @@
+function overageAlert(data) {
+    $("#data").css("color", "#D71328");
+    $("#data_remaining").html(data.used - data.total);
+    $("#data_remaining_label").html('over limit');
+}
+
 function updateStats(data) {
-    var res = JSON.parse(data);
-    var percent = 100 * res.used / res.total;
+    var percent = 100 * data.used / data.total < 100 ? 100 * data.used / data.total : 100;
     var percentInt = Math.round(percent);
     var progressBarClasses = $(".progress-bar").attr("class").split(/\s+/);
     var progressBarBackground;
@@ -16,9 +21,14 @@ function updateStats(data) {
             $(".progress-bar").removeClass(item);
         }
     });
-    $("#data_used").html(res.used);
-    $("#data_total").html(res.total);
-    $("#data_remaining").html(res.total - res.used);
+    if (percent == 100) {
+        overageAlert(data);
+    } else {
+        $("#data_remaining").html(data.total - data.used);
+        $("#data_remaining_label").html('remaining');
+    }
+    $("#data_used").html(data.used);
+    $("#data_total").html(data.total);
     $(".progress-bar").html(percentInt + "%");
     $(".progress-bar").css("width", percent + "%");
     $(".progress-bar").addClass(progressBarBackground);
@@ -26,7 +36,7 @@ function updateStats(data) {
 
 function loadComcastQuery() {
     $.get("response", function(data) {
-        updateStats(data);
+        updateStats(JSON.parse(data));
         $("#loader").hide();
         $("#data").css("display", "block");
         $("#data_progress").css("display", "block");
@@ -41,7 +51,7 @@ function reloadComcastQuery() {
     $("#data_remaining").addClass("half-transparent");
     $(".progress-bar").addClass("half-transparent");
     $.get("response", function(data) {
-        updateStats(data);
+        updateStats(JSON.parse(data));
         $(".fa-refresh").removeClass("fa-spin");
         $("#data_used").removeClass("half-transparent");
         $("#data_total").removeClass("half-transparent");
