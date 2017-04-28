@@ -25,6 +25,6 @@ Config Options
     - default: localhost
 - `comcastUsername` Your Comcast username
 - `comcastPassword` Your Comcast password
-- `customTitle` (Optional) Set a custom app title
+- `title` (Optional) Set a custom app title
     - default: Comstat
-- `customIcon` (Optional) Specify the class name of a [FontAwesome icon](http://fontawesome.io/icons/) to replace the default logo (e.g. `fa-bar-chart`)
+- `icon` (Optional) Specify the class name of a [FontAwesome icon](http://fontawesome.io/icons/) to replace the default logo (e.g. `fa-bar-chart`)
