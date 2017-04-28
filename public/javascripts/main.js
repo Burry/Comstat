@@ -1,17 +1,16 @@
 function normalAlert(data) {
-    var overage = data.total - data.used;
-    var overageCost = Math.ceil((overage + 1) / 50) * 10;
     $("#data").css("color", "#292b2c");
-    $("#data_remaining").html(overage);
-    $("#data_remaining_label").html('remaining');
-    $("#data_overage_charges").html(overageCost);
-    $("#data_overage_charges_row").css("display", "block");
+    $("#data_remainder").html(data.total - data.used);
+    $("#data_remainder_label").html('remaining');
 }
 
 function overageAlert(data) {
+    var overageCost = Math.ceil((data.used - data.total + 1) / 50) * 10;
     $("#data").css("color", "#D71328");
-    $("#data_remaining").html(data.used - data.total);
-    $("#data_remaining_label").html('over limit');
+    $("#data_remainder").html(data.used - data.total);
+    $("#data_remainder_label").html('over limit');
+    $("#data_overage_charges").html(overageCost);
+    $("#data_overage_charges_row").css("display", "block");
 }
 
 function updateStats(data) {
@@ -59,14 +58,14 @@ function reloadComcastQuery() {
     $(".fa-refresh").addClass("fa-spin");
     $("#data_used").addClass("half-transparent");
     $("#data_total").addClass("half-transparent");
-    $("#data_remaining").addClass("half-transparent");
+    $("#data_remainder").addClass("half-transparent");
     $(".progress-bar").addClass("half-transparent");
     $.get("response", function(data) {
         updateStats(JSON.parse(data));
         $(".fa-refresh").removeClass("fa-spin");
         $("#data_used").removeClass("half-transparent");
         $("#data_total").removeClass("half-transparent");
-        $("#data_remaining").removeClass("half-transparent");
+        $("#data_remainder").removeClass("half-transparent");
         $(".progress-bar").removeClass("half-transparent");
     });
 }
