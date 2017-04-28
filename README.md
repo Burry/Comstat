@@ -18,7 +18,7 @@ You should then be able to access Comstat through http://localhost:3234 or at wh
 
 Config Options
 -------
-- `port` (Optional) Port to run the server on
+- `port` (Optional) Port to run the server on – default 3234
 - `interface` (Optional) Routing interface – default 0.0.0.0
 - `comcastUsername` Your Comcast username
 - `comcastPassword` Your Comcast password
