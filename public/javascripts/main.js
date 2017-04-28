@@ -1,3 +1,9 @@
+function normalAlert(data) {
+    $("#data").css("color", "#292b2c");
+    $("#data_remaining").html(data.total - data.used);
+    $("#data_remaining_label").html('remaining');
+}
+
 function overageAlert(data) {
     $("#data").css("color", "#D71328");
     $("#data_remaining").html(data.used - data.total);
@@ -25,8 +31,7 @@ function updateStats(data) {
         percent = 100;
         overageAlert(data);
     } else {
-        $("#data_remaining").html(data.total - data.used);
-        $("#data_remaining_label").html('remaining');
+        normalAlert(data);
     }
     $("#data_used").html(data.used);
     $("#data_total").html(data.total);
