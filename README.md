@@ -1,3 +1,6 @@
+
+![Logo](public/images/android-chrome-192x192.png)
+
 Comstat
 -------
 Comcast forces you to go through a pretty crappy login process until they finally show you your data usage on a simple progress bar. This project uses Eric Swanson's [Python script](https://github.com/lachesis/comcast) to fetch the information from Comcast and then presents it in a nice front-end which...
