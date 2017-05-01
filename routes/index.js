@@ -1,13 +1,32 @@
-var express = require('express');
 var childProcess = require('child_process').spawn;
-var low = require('lowdb');
-var db = low('db.json');
+var express = require('express');
+var fs = require('fs');
+var sqlite3 = require('sqlite3').verbose();
 var router = express.Router();
+var db;
 
-/* Database stuff */
-db.defaults({
-  
-}).write();
+fs.open('./db.sqllite', 'r', function(err, fd) {
+    if (!err) {
+        console.log('found a db!');
+    } else if (err && err.code=='ENOENT') {
+        db = new sqlite3.Database('./db.sqllite');
+        db.serialize(function() {
+          db.run("CREATE TABLE loginDetails (info TEXT)");
+
+          var stmt = db.prepare("INSERT INTO loginDetails VALUES (?)");
+          stmt.run("USERNAME " + 0);
+          stmt.run("PASSWORD " + 1);
+          stmt.finalize();
+
+          db.each("SELECT rowid AS id, info FROM loginDetails", function(err, row) {
+              console.log(row.id + ": " + row.info);
+          });
+        });
+        db.close();
+    }
+});
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -30,5 +49,6 @@ router.get('/response', function(req, res, next) {
     ]);
     comcastPy.stdout.pipe(res);
 });
+
 
 module.exports = router;
