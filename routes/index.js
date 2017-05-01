@@ -1,6 +1,13 @@
 var express = require('express');
 var childProcess = require('child_process').spawn;
+var low = require('lowdb');
+var db = low('db.json');
 var router = express.Router();
+
+/* Database stuff */
+db.defaults({
+  
+}).write();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
