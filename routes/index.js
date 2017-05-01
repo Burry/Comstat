@@ -1,3 +1,4 @@
+var bodyParser = require('body-parser');
 var childProcess = require('child_process').spawn;
 var express = require('express');
 var fs = require('fs');
@@ -5,27 +6,10 @@ var sqlite3 = require('sqlite3').verbose();
 var router = express.Router();
 var db;
 
-fs.open('./db.sqllite', 'r', function(err, fd) {
-    if (!err) {
-        console.log('found a db!');
-    } else if (err && err.code=='ENOENT') {
-        db = new sqlite3.Database('./db.sqllite');
-        db.serialize(function() {
-          db.run("CREATE TABLE loginDetails (info TEXT)");
-
-          var stmt = db.prepare("INSERT INTO loginDetails VALUES (?)");
-          stmt.run("USERNAME " + 0);
-          stmt.run("PASSWORD " + 1);
-          stmt.finalize();
-
-          db.each("SELECT rowid AS id, info FROM loginDetails", function(err, row) {
-              console.log(row.id + ": " + row.info);
-          });
-        });
-        db.close();
-    }
-});
-
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
 function dbExists() {
   fs.open('./db.sqllite', 'r', function(err, fd) {
@@ -60,6 +44,27 @@ router.get('/response', function(req, res, next) {
     ]);
     comcastPy.stdout.pipe(res);
 });
+
+/* POST /config */
+router.post('/config', function(req, res, next) {
+    res.send('POST request');
+    db = new sqlite3.Database('./db.sqllite');
+        db.serialize(function() {
+        db.run("CREATE TABLE loginDetails (info TEXT)");
+
+        var stmt = db.prepare("INSERT INTO loginDetails VALUES (?)");
+        stmt.run(req.body.username);
+        stmt.run(req.body.password);
+        stmt.finalize();
+
+        db.each("SELECT rowid AS id, info FROM loginDetails", function(err, row) {
+            console.log(row.id + ": " + row.info);
+        });
+    });
+    db.close();
+});
+
+router.post
 
 
 module.exports = router;
