@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .container
+        nav.navbar.navbar-toggleable-xl.navbar-light.navbar-static-top
+            button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#nav-content', aria-controls='nav-content', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            span.navbar-brand
+                if icon
+                    i.fa(class=icon, aria-hidden='true')
+                else
+                    img.logo.align-top(src='images/logo.svg', draggable='false')
+                =title
+            .collapse.navbar-collapse.justify-content-end

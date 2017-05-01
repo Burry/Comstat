@@ -27,15 +27,26 @@ fs.open('./db.sqllite', 'r', function(err, fd) {
 });
 
 
+function dbExists() {
+  fs.open('./db.sqllite', 'r', function(err, fd) {
+    if (err && err.code=='ENOENT') { return false }
+    else { return true }
+  });
+}
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    var title = req.app.get('customTitle');
-    var icon = req.app.get('customIcon');
-    res.render('index', {
-        title: title,
-        icon: icon
-    });
+    if (dbExists()) {
+        var title = req.app.get('customTitle');
+        var icon = req.app.get('customIcon');
+        res.render('index', {
+            title: title,
+            icon: icon
+        });
+    } else {
+        res.render('setup', {});
+    }
 });
 
 /* GET python query to Comcast */
