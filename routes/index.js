@@ -6,13 +6,13 @@ var sqlite3 = require('sqlite3').verbose();
 var router = express.Router();
 var db;
 
-app.use(bodyParser.json());       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+router.use(bodyParser.json());       // to support JSON-encoded bodies
+router.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
 function dbExists() {
-  fs.open('./db.sqllite', 'r', function(err, fd) {
+  fs.open('./db.sqlite', 'r', function(err, fd) {
     if (err && err.code=='ENOENT') { return false }
     else { return true }
   });
@@ -48,7 +48,7 @@ router.get('/response', function(req, res, next) {
 /* POST /config */
 router.post('/config', function(req, res, next) {
     res.send('POST request');
-    db = new sqlite3.Database('./db.sqllite');
+    db = new sqlite3.Database('./db.sqlite');
         db.serialize(function() {
         db.run("CREATE TABLE loginDetails (info TEXT)");
 
