@@ -20,7 +20,7 @@ app.set('customTitle', config.title || 'Comstat');
 app.set('customIcon', config.icon || null);
 
 // port and interface setup
-var port = config.port || 3234;
+var port = config.port || 3233;
 var interface = config.interface || 'localhost';
 
 // view engine setup
