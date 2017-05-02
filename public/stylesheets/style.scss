@@ -1,3 +1,124 @@
+// Import frameworks
+@import "font-awesome/font-awesome";
+@import "bootstrap/bootstrap";
+
+
+// Crimson color
+$crimson-color: rgb(215,19,40);
+$crimson-color-a-50: rgba(215,19,40,0.5);
+$crimson-color-dark: rgb(198,2,23);
+$crimson-color-darker: rgb(181,1,6);
+
+
+// Logo svg
+$logo: '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500"><path d="M150.813928 105.802908C105.018247 137.363593 75 190.176228 75 250c0 96.649831 78.350169 175 175 175 35.68756 0 68.880097-10.682464 96.554431-29.024213l53.786207 53.786207C358.499405 481.301478 306.433339 500 250 500 111.928813 500 0 388.071187 0 250S111.928813 0 250 0c56.136613 0 107.951758 18.5024054 149.679787 49.7415688l-53.822792 53.8227922C318.323182 85.5040384 285.388266 75 250 75c-26.893087 0-52.36933 6.0662325-75.135022 16.9049923l67.858656 117.5346397c16.851687-3.089798 34.556261 4.297645 43.611816 19.982327 11.5 19.918584 4.667526 45.417725-15.251058 56.917725s-45.417725 4.667526-56.917725-15.251058c-9.055556-15.684683-6.600982-34.711014 4.500705-47.760105l-67.853444-117.525613zm0 0c7.603787-5.240249 15.642532-9.8946155 24.05105-13.8979157l-16.752456-29.0161034-24.056261 13.8888889 16.757667 29.0251302z" fill-rule="nonzero" fill="#D71328"/></svg>';
+
+
+//	Function to create an optimized svg url
+//	Version: 1.0.6
+@function svg-url($svg){
+	 //
+	 //	Add missing namespace
+	 //
+	 @if not str-index($svg,xmlns) {
+			 $svg: str-replace($svg, '<svg','<svg xmlns="http://www.w3.org/2000/svg"');
+	 }
+	 //
+	 //	Chunk up string in order to avoid
+	 //	"stack level too deep" error
+	 //
+	 $encoded:'';
+	 $slice: 2000;
+	 $index: 0;
+	 $loops: ceil(str-length($svg)/$slice);
+	 @for $i from 1 through $loops {
+			 $chunk: str-slice($svg, $index, $index + $slice - 1);
+			 //
+			 //	 Encode
+			 //
+			 $chunk: str-replace($chunk, '"', '\'');
+			 $chunk: str-replace($chunk, '%', '%25');
+			 $chunk: str-replace($chunk, '#', '%23');
+			 $chunk: str-replace($chunk, '{', '%7B');
+			 $chunk: str-replace($chunk, '}', '%7D');
+			 $chunk: str-replace($chunk, '<', '%3C');
+			 $chunk: str-replace($chunk, '>', '%3E');
+
+			 //
+			 //		The maybe list
+			 //
+			 //		Keep size and compile time down
+			 //		... only add on documented fail
+			 //
+			 //	$chunk: str-replace($chunk, '&', '%26');
+			 //	$chunk: str-replace($chunk, '|', '%7C');
+			 //	$chunk: str-replace($chunk, '[', '%5B');
+			 //	$chunk: str-replace($chunk, ']', '%5D');
+			 //	$chunk: str-replace($chunk, '^', '%5E');
+			 //	$chunk: str-replace($chunk, '`', '%60');
+			 //	$chunk: str-replace($chunk, ';', '%3B');
+			 //	$chunk: str-replace($chunk, '?', '%3F');
+			 //	$chunk: str-replace($chunk, ':', '%3A');
+			 //	$chunk: str-replace($chunk, '@', '%40');
+			 //	$chunk: str-replace($chunk, '=', '%3D');
+
+			 $encoded: #{$encoded}#{$chunk};
+			 $index: $index + $slice;
+	 }
+	 @return url("data:image/svg+xml,#{$encoded}");
+}
+@function str-replace($string, $search, $replace: '') {
+	 $index: str-index($string, $search);
+	 @return if($index,
+			 str-slice($string, 1, $index - 1) + $replace +
+			 str-replace(str-slice($string, $index +
+			 str-length($search)), $search, $replace),
+			 $string);
+}
+@mixin background-svg($svg){
+	 background-image: svg-url($svg);
+}
+
+
+// Text selection
+::selection {
+    background: rgba(0,0,0,0.15);
+}
+::-moz-selection {
+    background: rgba(0,0,0,0.15);
+}
+
+
+// Logo impmentation
+.logo {
+	display: inline-block;
+	@include background-svg($logo);
+	background-size: 100%;
+	background-position: center left;
+	background-repeat: no-repeat;
+}
+
+
+// Custom bootstrap theme colors
+.form-control:focus {
+	border-color: $crimson-color;
+}
+.btn-danger {
+	background-color: $crimson-color;
+	border-color: $crimson-color;
+	&:hover,
+	&:active {
+		background-color: $crimson-color-dark;
+		border-color: $crimson-color-darker;
+	}
+	&:focus {
+		-webkit-box-shadow: 0 0 0 2px $crimson-color-a-50;
+		box-shadow: 0 0 0 2px $crimson-color-a-50;
+	}
+}
+
+
+// Navbar
 nav {
 	padding: .5rem 0rem !important;
 	.navbar-brand {
@@ -7,6 +128,7 @@ nav {
 		-ms-user-select: none;
 		cursor: default;
 		.logo {
+			width: 30px;
 			height: 30px;
 			display: inline-block !important;
 		}
@@ -21,6 +143,8 @@ nav {
 	}
 }
 
+
+// Main header
 header {
 	.lead {
 		margin: 0 auto;
@@ -59,12 +183,73 @@ header {
 	}
 }
 
+
+// Setup page
+.setup-col {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 300;
+		line-height: 1.1;
+		margin-bottom: 0.5em;
+	}
+	.logo {
+		width: 50px;
+		height: 50px;
+		padding-left: 50px;
+		padding-top: 2px;
+		background-size: 50px 50px;
+	}
+	.setup-box {
+		margin-top: 25px;
+		.col-5 {
+			input {
+				display: inline-block;
+				max-width: 5em;
+			}
+			span {
+				margin-left: 10px;
+				padding-top: calc(.5rem - 1px * 2);
+				padding-bottom: calc(.5rem - 1px * 2);
+			}
+		}
+
+		.btn {
+			cursor: pointer;
+			margin-top: 1em;
+		}
+	}
+}
+
+
+// 50% opacity
 .half-transparent {
 	opacity: 0.5;
 }
 
+
+// Landscape phones and up
+@media (min-width: 576px) {
+	.setup-col {
+		padding-top: 1.6em;
+	}
+}
+
+
+// Tablets and up
 @media (min-width: 768px) {
 	#percent {
 		font-size: 5.5rem;
+	}
+
+	.setup-col {
+		padding-top: 3.2em;
+		.setup-box {
+			border-radius: 5px;
+			background: #f5f5f5;
+			padding: 2em;
+			margin-top: 3.2em;
+		}
 	}
 }
