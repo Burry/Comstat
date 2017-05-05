@@ -41,9 +41,16 @@ block content
 	
 	script(src='javascripts/socket.min.js')
 	script.
-		var socket = io.connect('#{host}');
+		var connectionOptions =  {
+			"force new connection" : true,
+			"reconnectionAttempts": "Infinity",
+			"timeout" : 10000,
+			"transports" : ["websocket"]
+		};
+        
+		var socket = io.connect('#{host}', connectionOptions);
 		socket.on('updateLoadingStatus', function(data) {
-			$('#loader span').html(data.status);
+			$('#loader span').html(status);
 		});
 
 	header.jumbotron.jumbotron-fluid
