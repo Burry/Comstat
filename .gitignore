@@ -3,3 +3,5 @@
 node_modules
 config.json
 db.sqlite3
+db/*
+comcastTest.js
