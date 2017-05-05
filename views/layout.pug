@@ -28,7 +28,7 @@ html
         script(src='javascripts/bootstrap-v4-alpha6.js')
         script(src='javascripts/comstat.js')
         script.            
-            var socket = io.connect('#{host}:3233', {secure: true});
+            var socket = io.connect('#{host}', {secure: true});
             socket.on('updateLoadingStatus', function(data) {
                 $('#loader span').html(data);
             });
