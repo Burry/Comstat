@@ -38,12 +38,19 @@ block content
 	//- 				.modal-footer
 	//- 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
 	//- 					input.btn.btn-primary(type='submit', value='Save')
+	
+	script(src='javascripts/socket.min.js')
+	script.
+		var socket = io.connect('#{host}');
+		socket.on('updateLoadingStatus', function(data) {
+			$('#loader span').html(data.status);
+		});
 
 	header.jumbotron.jumbotron-fluid
 		.container
 			p.lead#loader
 				i.fa.fa-spin.fa-circle-o-notch(aria-hidden='true')
-				|  Querying Comcast
+				span Querying Comcast
 			.row.preload
 				.col-6
 					h1#percent
