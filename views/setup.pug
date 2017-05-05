@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-lg-6.col-md-8.offset-lg-3.offset-md-2.setup-col
+                h1
+                    .logo Comstat
+                p.lead
+                    | Welcome to Comstat! It looks like this is your first time running the application. Please enter your Comcast login details so we can fetch your data usage. Your credentials will not be sent anywhere but Comcast and will be saved on your sever.
+                if secure == false
+                    .alert.alert-danger(role='alert')
+                        strong
+                            i.fa.fa-lock(aria-hidden='true')
+                            |  Insecure connection:
+                        |  You are connected through HTTP. Consider accessing Comstat on the server itself or setting up an HTTPS proxy, and then enter your credentials, or they could be intercepted.
+                .setup-box
+                    form(action='config', method='post', autocomplete='off')
+                        .form-group.row
+                            label.col-sm-3.col-form-label(for='username') Username
+                            .col-sm-9
+                                input#username.form-control(type='text', name='username')
+                        .form-group.row
+                            label.col-sm-3.col-form-label(for='password') Password
+                            .col-sm-9
+                                input#password.form-control(type='password', name='password')
+                        .form-group.row
+                            label.col-sm-3.col-form-label(for='data') Data cap
+                            .col-5
+                                input#dataCap.form-control(type='number', name='dataCap', maxlength='5', placeholder='1024')
+                                span GB
+                        input.btn.btn-primary(type='submit', value='Submit')

@@ -79,7 +79,7 @@ function reloadComcastQuery() {
     });
 }
 
-$("#reload").click(function() {
+$("#refresh").click(function() {
     reloadComcastQuery();
 });
 

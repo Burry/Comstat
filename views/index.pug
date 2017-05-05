@@ -1,45 +1,69 @@
 extends layout
 
 block content
-    .container
-        nav.navbar.navbar-toggleable-xl.navbar-light.navbar-static-top
-            button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#nav-content', aria-controls='nav-content', aria-expanded='false', aria-label='Toggle navigation')
-                span.navbar-toggler-icon
-            span.navbar-brand
-                if icon
-                    i.fa(class=icon, aria-hidden='true')
-                else
-                    img.logo.align-top(src='images/logo.svg', draggable='false')
-                =title
-            .collapse.navbar-collapse.justify-content-end
-                button#reload.btn.btn-secondary.preload(type='button')
-                    i.fa.fa-refresh(aria-hidden='true')
+	.container
+		nav.navbar.navbar-toggleable-xl.navbar-light.navbar-static-top
+			button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#nav-content', aria-controls='nav-content', aria-expanded='false', aria-label='Toggle navigation')
+				span.navbar-toggler-icon
+			span.navbar-brand
+				if icon
+					i.fa(class=icon, aria-hidden='true')
+				else
+					.logo.align-top
+				=title
+			.collapse.navbar-collapse.justify-content-end
+				button#refresh.btn.btn-secondary.preload(type='button')
+					i.fa.fa-refresh(aria-hidden='true')
+				//- button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#notificationsModal')
+				//- 	i.fa.fa-bell(aria-hidden='true')
 
-    header.jumbotron.jumbotron-fluid
-        .container
-            p.lead#loader
-                i.fa.fa-spin.fa-circle-o-notch(aria-hidden='true')
-                |  Querying Comcast
-            .row.preload
-                .col-6
-                    h1#percent
-                .col-6
-                    p#details
-                        span#data_used
-                        | /
-                        span#data_total
-                        | &nbsp;GB
-                        br
-                        span#data_remainder
-                        | &nbsp;
-                        span#data_units
-                        | &nbsp;
-                        span#data_remainder_label
-                        br
-                        span#data_overage_charges_row + $
-                            span#data_overage_charges
-                            br
-                        span#days_remaining
-                        |  days until reset
-            #data_progress.progress.preload
-                .progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+
+	//- #notificationsModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='notificationsModalLabel', aria-hidden='true')
+	//- 	.modal-dialog(role='document')
+	//- 		.modal-content
+	//- 			form#phoneForm(method='post')
+	//- 				.modal-header
+	//- 					h5#notificationsModalLabel.modal-title Notifications
+	//- 					|
+	//- 					button.close(type='button', data-dismiss='modal', aria-label='Close')
+	//- 						span(aria-hidden='true') &times;
+	//- 				.modal-body
+	//- 					p
+	//- 					    strong TESTING:
+	//- 					    | Developing a basic notification system.
+	//- 					.input-group
+	//- 					    span#phone-input-addon.input-group-addon
+	//- 					        i.fa.fa-phone(aria-hidden='true')
+	//- 					    input#phone.form-control(type='tel', name='phone', aria-describedby='phone-input-addon')
+	//- 				.modal-footer
+	//- 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+	//- 					input.btn.btn-primary(type='submit', value='Save')
+
+	header.jumbotron.jumbotron-fluid
+		.container
+			p.lead#loader
+				i.fa.fa-spin.fa-circle-o-notch(aria-hidden='true')
+				|  Querying Comcast
+			.row.preload
+				.col-6
+					h1#percent
+				.col-6
+					p#details
+						span#data_used
+						| /
+						span#data_total
+						| &nbsp;GB
+						br
+						span#data_remainder
+						| &nbsp;
+						span#data_units
+						| &nbsp;
+						span#data_remainder_label
+						br
+						span#data_overage_charges_row + $
+							span#data_overage_charges
+							br
+						span#days_remaining
+						|  days until reset
+			#data_progress.progress.preload
+				.progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
