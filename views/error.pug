@@ -1,6 +1,26 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+    .container
+        nav.navbar.navbar-toggleable-xl.navbar-light.navbar-static-top
+            button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#nav-content', aria-controls='nav-content', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            span.navbar-brand
+                if icon
+                    i.fa(class=icon, aria-hidden='true')
+                else
+                    .logo.align-top
+                =title
+            .collapse.navbar-collapse.justify-content-end
+                button#refresh.btn.btn-secondary.preload(type='button')
+                    i.fa.fa-refresh(aria-hidden='true')
+                button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#notificationsModal')
+                    i.fa.fa-bell(aria-hidden='true')
+
+    .jumbotron.jumbotron-fluid
+        .container
+            h1.display-3
+                b=error.status
+                | 
+                =message
+            pre #{error.stack}

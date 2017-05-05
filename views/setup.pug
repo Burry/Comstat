@@ -15,7 +15,7 @@ block content
                             |  Insecure connection:
                         |  You are connected through HTTP. Consider accessing Comstat on the server itself or setting up an HTTPS proxy, and then enter your credentials, or they could be intercepted.
                 .setup-box
-                    form(action='config', method='post')
+                    form(action='config', method='post', autocomplete='off')
                         .form-group.row
                             label.col-sm-3.col-form-label(for='username') Username
                             .col-sm-9
@@ -27,6 +27,6 @@ block content
                         .form-group.row
                             label.col-sm-3.col-form-label(for='data') Data cap
                             .col-5
-                                input#data.form-control(type='number', name='data', maxlength='5', placeholder='1024')
+                                input#dataCap.form-control(type='number', name='dataCap', maxlength='5', placeholder='1024')
                                 span GB
-                        input.btn.btn-danger(type='submit', value='Submit')
+                        input.btn.btn-primary(type='submit', value='Submit')
