@@ -10,7 +10,7 @@ var index = require('./lib/index');
 var app = express();
 
 // port and interface setup
-var port = 3233;
+var port = 3234;
 var interface = 'localhost';
 
 // view engine setup
