@@ -22,8 +22,20 @@ html
         link(rel='shortcut icon', href='images/favicon.ico')
 
         script(src='javascripts/jquery-3.2.1.min.js')
-        script(src='/socket.io/socket.io.js')
+        script(src='socket.io/socket.io.js')
     body
         block content
         script(src='javascripts/bootstrap-v4-alpha6.js')
-        script(src='socket.io/socket.io.js')
+        script(src='javascripts/comstat.js')
+        script.
+            var connectionOptions =  {
+                "force new connection" : true,
+                "reconnectionAttempts": "Infinity",
+                "timeout" : 10000,
+                "transports" : ["websocket"]
+            };
+            
+            var socket = io.connect('#{host}:3233');
+            socket.on('updateLoadingStatus', function(data) {
+                $('#loader span').html(data);
+            });
