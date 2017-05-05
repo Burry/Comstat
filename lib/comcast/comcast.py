@@ -2,27 +2,35 @@
 from __future__ import print_function
 
 import json
-import logging
 import re
 import requests
 import sys
 import time
-
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.ERROR)
-logging.getLogger('requests').setLevel(logging.ERROR)
 
 session = requests.Session()
 
 username = sys.argv[1]
 password = sys.argv[2]
 
-logger.debug("Finding req_id for login...")
+class Unbuffered(object):
+   def __init__(self, stream):
+       self.stream = stream
+   def write(self, data):
+       self.stream.write(data)
+       self.stream.flush()
+   def writelines(self, datas):
+       self.stream.writelines(datas)
+       self.stream.flush()
+   def __getattr__(self, attr):
+       return getattr(self.stream, attr)
+
+sys.stdout = Unbuffered(sys.stdout)
+
+print("Fetching request ID for account...")
 res = session.get('https://login.comcast.net/login?r=comcast.net&s=oauth&continue=https%3A%2F%2Flogin.comcast.net%2Foauth%2Fauthorize%3Fclient_id%3Dmy-account-web%26redirect_uri%3Dhttps%253A%252F%252Fcustomer.xfinity.com%252Foauth%252Fcallback%26response_type%3Dcode%26state%3D%2523%252Fdevices%26response%3D1&client_id=my-account-web')
 assert res.status_code == 200
 m = re.search(r'<input type="hidden" name="reqId" value="(.*?)">', res.text)
 req_id = m.group(1)
-logger.debug("Found req_id = %r", req_id)
 
 data = {
     'user': username,
@@ -39,22 +47,22 @@ data = {
     'lang': 'en',
 }
 
-logger.debug("Posting to login...")
+print("Posting login credentials...")
 res = session.post('https://login.comcast.net/login', data=data)
 assert res.status_code == 200
 
-logger.debug("Preloader HTML...")
+print("Recieving preloader HTML...")
 res = session.get('https://customer.xfinity.com/Secure/Preloading/?backTo=%2fMyServices%2fInternet%2fUsageMeter%2f')
 assert res.status_code == 200
 
-logger.debug("Preloader AJAX...")
+print("Recieving preloader AJAX...")
 res = session.get('https://customer.xfinity.com/Secure/Preloader.aspx')
 assert res.status_code == 200
 
-logger.debug("Waiting 5 seconds for preloading to complete...")
+print("Waiting 5 seconds for preload...")
 time.sleep(5)
 
-logger.debug("Fetching internet usage HTML...")
+print("Pulling usage data...")
 res = session.get('https://customer.xfinity.com/MyServices/Internet/UsageMeter/')
 assert res.status_code == 200
 html = res.text
