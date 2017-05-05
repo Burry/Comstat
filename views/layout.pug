@@ -28,14 +28,15 @@ html
         script(src='javascripts/bootstrap-v4-alpha6.js')
         script(src='javascripts/comstat.js')
         script.
-            var connectionOptions =  {
-                "force new connection" : true,
+            var socketOptions =  {
+                "force new connection": true,
                 "reconnectionAttempts": "Infinity",
-                "timeout" : 10000,
-                "transports" : ["websocket"]
+                "timeout": 10000,
+                "transports": ["websocket"],
+                "secure": true
             };
             
-            var socket = io.connect('#{host}:3233');
+            var socket = io.connect('#{host}:3233', socketOptions);
             socket.on('updateLoadingStatus', function(data) {
                 $('#loader span').html(data);
             });
