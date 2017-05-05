@@ -224,9 +224,13 @@ header {
 	    padding-top: 2px;
 	    background-size: 50px 50px;
 	}
+	
+	.setup-box.step-2 {
+		display: none;
+	}
 
 	.setup-box {
-    margin-top: 25px;
+    	margin-top: 25px;
 
 		.col-5 {
 			input {

@@ -1,3 +1,7 @@
+.DS_Store
+.Trashes
 node_modules
 config.json
 db.sqlite3
+db/*
+comcastTest.js

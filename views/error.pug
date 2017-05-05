@@ -20,7 +20,8 @@ block content
     .jumbotron.jumbotron-fluid
         .container
             h1.display-3
-                b=error.status
+                if error.status
+                    b=error.status
                 | 
                 =message
             pre #{error.stack}

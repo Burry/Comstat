@@ -1,17 +1,18 @@
-var express = require('express');
-var path = require('path');
+var events = require('events').EventEmitter.prototype._maxListeners = 100;
 var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var index = require('./modules/index');
+var cookieParser = require('cookie-parser');
+var express = require('express');
+var logger = require('morgan');
+var path = require('path');
 
 var app = express();
 
+var index = require('./lib/index');
+
 // port and interface setup
-var port = 3233;
-var interface = 'localhost';
+app.set('port', 3234);
+app.set('interface', 'localhost');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,24 +29,34 @@ app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
-app.listen(port, interface, function() {
-    console.log('Comstat is running at ' + 'http://' + interface + ':' + port);
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+});
+
+app.listen(app.get('port'), app.get('interface'), function() {
+    console.log('Comstat is running at ' + 'http://' + app.get('interface') + ':' + app.get('port'));
 });
 
 module.exports = app;
