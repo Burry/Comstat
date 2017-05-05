@@ -2,10 +2,11 @@ var events = require('events').EventEmitter.prototype._maxListeners = 100;
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');var path = require('path');
+var express = require('express');
+var logger = require('morgan');
+var path = require('path');
 
-var app = require('express').createServer();
-var io = require('socket.io')(app);
+var app = express();
 
 var index = require('./lib/index');
 
