@@ -27,15 +27,8 @@ html
         block content
         script(src='javascripts/bootstrap-v4-alpha6.js')
         script(src='javascripts/comstat.js')
-        script.
-            var socketOptions =  {
-                "force new connection": true,
-                "reconnectionAttempts": "Infinity",
-                "timeout": 10000,
-                "secure": true
-            };
-            
-            var socket = io.connect('#{host}:3233', socketOptions);
+        script.            
+            var socket = io.connect('#{host}:3233', {secure: true});
             socket.on('updateLoadingStatus', function(data) {
                 $('#loader span').html(data);
             });
