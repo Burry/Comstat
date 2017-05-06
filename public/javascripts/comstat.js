@@ -54,7 +54,7 @@ function updateStats(data) {
 }
 
 function presentDetails() {
-    $("#loader").hide();
+    $(".jumbotron-fluid .loader").hide();
     $(".preload").show();
     $(".row").css("display", "flex");
 }
