@@ -32,7 +32,7 @@ html
                 var dataCap = #{dataCap};
                 var socket = io.connect();
                 socket.on('updateLoadingStatus', function(data) {
-                    $('#loader span').html(data);
+                    $('.loader span').html(data);
                 });
             script(src='javascripts/comstat.js')                
         if !dataCap

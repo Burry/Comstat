@@ -152,9 +152,10 @@ nav {
 
 // Main header
 header {
-	.lead {
+	.loader {
 		margin: 0 auto;
 		text-align: center;
+		min-height: 60px;
 
 		.fa-spin {
 			margin-right: 5px;
