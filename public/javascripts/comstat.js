@@ -1,15 +1,15 @@
 function normalAlert(data) {
     $("#details").css("color", "#292b2c");
-    $("#data_remainder").html(data.total - data.used);
+    $("#data_remainder").html(dataCap - data.used);
     $("#data_remainder_label").html('remaining');
     $("#data_overage_charges_row").css("display", "none");
 }
 
 function overageAlert(data) {
-    var overageCost = Math.ceil((data.used - data.total + 1) / 50) * 10;
+    var overageCost = Math.ceil((data.used - dataCap + 1) / 50) * 10;
     overageCost = overageCost >= 200 ? 200 : overageCost;
     $("#details").css("color", "#D71328");
-    $("#data_remainder").html(data.used - data.total);
+    $("#data_remainder").html(data.used - dataCap);
     $("#data_remainder_label").html('over limit');
     $("#data_overage_charges").html(overageCost);
     $("#data_overage_charges_row").css("display", "initial");
@@ -23,7 +23,7 @@ function daysRemaining() {
 }
 
 function updateStats(data) {
-    var percent = 100 * data.used / data.total;
+    var percent = 100 * data.used / dataCap;
     var percentInt = Math.round(percent);
     var progressBarClasses = $(".progress-bar").attr("class").split(/\s+/);
     var progressBarBackground;
@@ -47,7 +47,6 @@ function updateStats(data) {
     }
     $("#percent").html(percentInt + "%");
     $("#data_used").html(data.used);
-    $("#data_total").html(data.total);
     $("#data_units").html(data.unit);
     $("#days_remaining").html(daysRemaining());
     $(".progress-bar").css("width", percent + "%");
@@ -61,7 +60,7 @@ function presentDetails() {
 }
 
 function loadComcastQuery() {
-    $.get("response", function(data) {
+    $.get("comcast/data", function(data) {
         updateStats(JSON.parse(data));
         presentDetails();
     });
@@ -71,7 +70,7 @@ function reloadComcastQuery() {
     $(".fa-refresh").addClass("fa-spin");
     $("header .row").addClass("half-transparent");
     $(".progress-bar").addClass("half-transparent");
-    $.get("response", function(data) {
+    $.get("comcast/data", function(data) {
         updateStats(JSON.parse(data));
         $(".fa-refresh").removeClass("fa-spin");
         $("header .row").removeClass("half-transparent");

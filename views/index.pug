@@ -10,7 +10,8 @@ block content
 					i.fa(class=icon, aria-hidden='true')
 				else
 					.logo.align-top
-				=title
+				| Comstat
+
 			.collapse.navbar-collapse.justify-content-end
 				button#refresh.btn.btn-secondary.preload(type='button')
 					i.fa.fa-refresh(aria-hidden='true')
@@ -52,7 +53,7 @@ block content
 					p#details
 						span#data_used
 						| /
-						span#data_total
+						span#data_total=dataCap
 						| &nbsp;GB
 						br
 						span#data_remainder

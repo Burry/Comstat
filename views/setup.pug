@@ -6,10 +6,10 @@ block content
             .col-lg-6.col-md-8.offset-lg-3.offset-md-2.setup-col
                 h1
                     .logo Comstat
-                p.lead
-                    | Welcome to Comstat! It looks like this is your first time running the application. Please enter your Comcast login details so we can fetch your data usage. Your credentials will not be sent anywhere but Comcast and will be saved on your sever.
-                .setup-box.step-1
-                    form(action='account', method='post', autocomplete='off')
+                p
+                    | Welcome to Comstat! It looks like this is your first time running the application. Please enter your Comcast login details so we can fetch your data usage. They will only be sent to Comcast and saved on your server.
+                .setup-box
+                    form#accountDetails(action='config', method='post', autocomplete='off')
                         .form-group.row
                             label.col-sm-3.col-form-label(for='username') Username
                             .col-sm-9
@@ -23,23 +23,9 @@ block content
                             .col-5
                                 input#dataCap.form-control(type='number', name='dataCap', maxlength='5', placeholder='1024')
                                 span GB
-                        input.btn.btn-primary(type='submit', value='Next')
-				.setup-box.step-2
-                    form(action='config', method='post', autocomplete='off')
-                        .form-group.row
-                            label.col-sm-3.col-form-label(for='hostname') Hostname
-                            .col-sm-9
-                                input#hostname.form-control(type='text', name='hostname', placeholder='localhost')
-                        .form-group.row
-                            label.col-sm-3.col-form-label(for='urlBase') URL Base
-                            .col-sm-9
-                                input#urlBase.form-control(type='text', name='urlBase', placeholder='/')
-                    	.form-group.row
-                            label.col-sm-3.col-form-label(for='urlBase') URL Base
-                            .col-sm-9
-                                input#interface.form-control(type='text', name='interface', placeholder='localhost')
-                        .form-group.row
-                            label.col-sm-3.col-form-label(for='port') Port
-                            .col-5
-                                input#dataCap.form-control(type='number', name='port', maxlength='6', placeholder='3234')
-                        input.btn.btn-primary(type='submit', value='Submit')
+                        .loader
+                            i.fa.fa-spin.fa-circle-o-notch.fa-2x(aria-hidden='true')
+                            i.fa.fa-check-circle.fa-2x(aria-hidden='true')
+                            i.fa.fa-times-circle.fa-2x(aria-hidden='true')
+                        input.btn.btn-primary.float-sm-right(type='submit', value='Submit')
+                        .clearfix

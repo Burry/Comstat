@@ -224,13 +224,18 @@ header {
 	    padding-top: 2px;
 	    background-size: 50px 50px;
 	}
-	
+
 	.setup-box.step-2 {
 		display: none;
 	}
 
 	.setup-box {
     	margin-top: 25px;
+
+		p {
+			font-size: 1rem;
+			font-weight: 300;
+		}
 
 		.col-5 {
 			input {
@@ -242,6 +247,33 @@ header {
 				margin-left: 10px;
 				padding-top: calc(.5rem - 1px * 2);
 				padding-bottom: calc(.5rem - 1px * 2);
+			}
+		}
+
+		.loader {
+			position: relative;
+			top: 18px;
+			left: 100px;
+
+			.fa {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			.fa-check-circle,
+			.fa-times-circle {
+				font-size: 2.25em;
+				top: -2px;
+			}
+
+			.fa-check-circle {
+				color: rgb(0, 200, 20);
+			}
+
+			.fa-times-circle {
+				color: $crimson-color;
 			}
 		}
 
@@ -261,6 +293,14 @@ header {
 @media (min-width: 576px) {
 	.setup-col {
 		padding-top: 1.6em;
+		.setup-box {
+			p {
+				font-size: 1.25rem;
+			}
+			.loader {
+				left: 0;
+			}
+		}
 	}
 }
 
