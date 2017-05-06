@@ -10,6 +10,7 @@ var path = require('path');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+io.origins('*:*')
 
 var index = require('./lib/index')(io);
 

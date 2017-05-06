@@ -27,13 +27,13 @@ html
         block content
         script(src='javascripts/tether.min.js')
         script(src='javascripts/bootstrap-v4-alpha6.js')
-        if socketHost
+        if dataCap
             script.
                 var dataCap = #{dataCap};
-                var socket = io.connect('#{socketHost}', {secure: true});
+                var socket = io.connect();
                 socket.on('updateLoadingStatus', function(data) {
                     $('#loader span').html(data);
                 });
             script(src='javascripts/comstat.js')                
-        if !socketHost
+        if !dataCap
             script(src='javascripts/setup.js')
