@@ -110,6 +110,12 @@ $logo: '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox
 		-webkit-box-shadow: 0 0 0 2px $crimson-color-a-50;
 		box-shadow: 0 0 0 2px $crimson-color-a-50;
 	}
+
+	&:disabled,
+	.disabled {
+		background-color: $crimson-color-a-50;
+		border-color: transparent;
+	}
 }
 
 button {
@@ -152,9 +158,10 @@ nav {
 
 // Main header
 header {
-	.lead {
+	.loader {
 		margin: 0 auto;
 		text-align: center;
+		min-height: 60px;
 
 		.fa-spin {
 			margin-right: 5px;
@@ -228,7 +235,7 @@ header {
 			font-weight: 300;
 		}
 
-		.col-5 {
+		.col-6 {
 			input {
 				display: inline-block;
 				max-width: 5em;

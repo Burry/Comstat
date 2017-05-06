@@ -1,4 +1,4 @@
-var events = require('events').EventEmitter.prototype._maxListeners = 100;
+require('events').EventEmitter.prototype._maxListeners = 100;
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -7,8 +7,11 @@ var logger = require('morgan');
 var path = require('path');
 
 var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+io.origins('*:*');
 
-var index = require('./lib/index');
+var routes = require('./lib/routes')(io);
 
 // port and interface setup
 app.set('port', 3234);
@@ -25,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,7 +58,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-app.listen(app.get('port'), app.get('interface'), function() {
+server.listen(app.get('port'), app.get('interface'), function() {
     console.log('Comstat is running at ' + 'http://' + app.get('interface') + ':' + app.get('port'));
 });
 

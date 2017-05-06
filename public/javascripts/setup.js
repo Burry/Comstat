@@ -1,15 +1,23 @@
 $('#accountDetails').submit(function(e) {
-    $('.loader .fa-circle-o-notch').show();
-    $('.loader .fa-check-circle').hide();
-    $('.loader .fa-times-circle').hide();
+    var successIcon = $('.loader .fa-check-circle');
+    var failureIcon = $('.loader .fa-times-circle');
+    var loadingIcon = $('.loader .fa-circle-o-notch');
+    var submitButton = $('.setup-box input.btn');
+
+    loadingIcon.show();
+    successIcon.hide();
+    failureIcon.hide();
+    submitButton.prop("disabled",true);
+
     $.post('comcast/check', $('form#accountDetails').serialize(), function(data) {
         if (data == 'ok') {
-            $('.loader .fa-circle-o-notch').hide();
-            $('.loader .fa-check-circle').show();
+            loadingIcon.hide();
+            successIcon.show();
             setTimeout(setComcastAccount(), 1000);
         } else {
-            $('.loader .fa-circle-o-notch').hide();
-            $('.loader .fa-times-circle').show();
+            loadingIcon.hide();
+            failureIcon.show();
+            submitButton.prop("disabled",false);
         }
         console.log(data);
     })

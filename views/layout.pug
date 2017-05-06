@@ -5,10 +5,10 @@ html
         meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
         meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
-        meta(name='apple-mobile-web-app-title', content=title)
+        meta(name='apple-mobile-web-app-title', content='Comstat')
         meta(name='apple-mobile-web-app-capable', content='yes')
         meta(name='apple-mobile-web-app-status-bar-style', content='black')
-        meta(name='application-name', content=title)
+        meta(name='application-name', content='Comstat')
         meta(name='theme-color', content='#ffffff')
         meta(name='msapplication-config', content='images/browserconfig.xml')
 
@@ -27,13 +27,13 @@ html
         block content
         script(src='javascripts/tether.min.js')
         script(src='javascripts/bootstrap-v4-alpha6.js')
-        if socketHost
+        if dataCap
             script.
                 var dataCap = #{dataCap};
-                var socket = io.connect('#{socketHost}', {secure: true});
+                var socket = io.connect();
                 socket.on('updateLoadingStatus', function(data) {
-                    $('#loader span').html(data);
+                    $('p.lead.loader span').html(data);
                 });
             script(src='javascripts/comstat.js')                
-        if !socketHost
+        if !dataCap
             script(src='javascripts/setup.js')

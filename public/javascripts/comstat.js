@@ -54,7 +54,7 @@ function updateStats(data) {
 }
 
 function presentDetails() {
-    $("#loader").hide();
+    $("p.lead.loader").hide();
     $(".preload").show();
     $(".row").css("display", "flex");
 }
