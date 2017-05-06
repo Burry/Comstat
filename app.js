@@ -10,7 +10,7 @@ var path = require('path');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-io.origins('*:*')
+io.origins('*:*');
 
 var index = require('./lib/index')(io);
 
@@ -59,7 +59,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-app.listen(app.get('port'), app.get('interface'), function() {
+server.listen(app.get('port'), app.get('interface'), function() {
     console.log('Comstat is running at ' + 'http://' + app.get('interface') + ':' + app.get('port'));
 });
 
