@@ -1,8 +1,9 @@
 require('events').EventEmitter.prototype._maxListeners = 100;
-var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var db = require('./lib/db');
 var express = require('express');
+var favicon = require('serve-favicon');
 var logger = require('morgan');
 var path = require('path');
 
@@ -11,7 +12,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 io.origins('*:*');
 
-var routes = require('./lib/routes')(io);
+var routes = require('./lib/routes')(db, io);
 
 // port and interface setup
 app.set('port', 3234);
