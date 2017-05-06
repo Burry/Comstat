@@ -4,9 +4,9 @@
 Comstat
 -------
 Comcast forces you to go through a pretty crappy login process until they finally show you your data usage on a simple progress bar. This project uses Eric Swanson's [Python script](https://github.com/lachesis/comcast) to fetch the information from Comcast and then presents it in a nice front-end which...
-  - You can host and share with your family or roommates
-  - Requires you to authenticate exactly once
-  - Can be easily expanded upon in the future with statistics and use predictions to make something much more useful than what Comcast provides
+    - You can host and share with your family or roommates
+    - Requires you to authenticate exactly once
+    - Can be easily expanded upon in the future with statistics and use predictions to make something much more useful than what Comcast provides
 
 Preview
 -------
@@ -22,9 +22,9 @@ Usage
 -------
 Enter the Comstat directory and start the server with `npm start`
 
-If you see an `EACCES: permission denied` error, you may need to run `sudo chmod 755 db` first.
+If you see an `EACCES: permission denied` error, you may need to run `sudo chown -R [YOURUSERNAME] db` first.
 
-You should then be able to access Comstat at http://localhost:3234.
+You should then be able to access Comstat at [http://localhost:3234]().
 
 
 License
