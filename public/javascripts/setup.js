@@ -18,6 +18,6 @@ $('#accountDetails').submit(function(e) {
 
 function setComcastAccount() {
     $.post('config', $('form#accountDetails').serialize(), function(data) {
-        window.location = '/';
+        location.reload();
     });
 }
