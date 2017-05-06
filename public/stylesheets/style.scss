@@ -79,15 +79,6 @@ $logo: '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox
 	background-image: svg-url($svg);
 }
 
-// Text selection
-::selection {
-	background: rgba(0, 0, 0, 0.15);
-}
-
-::-moz-selection {
-	background: rgba(0, 0, 0, 0.15);
-}
-
 // Logo impmentation
 .logo {
 	display: inline-block;
