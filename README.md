@@ -16,13 +16,15 @@ Installation
 -------
 Requires Node.js and Python 3 with the requests library.
 1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
-2. Inside the Comstat directory, run `npm install` to install node dependencies.
+2. Inside the Comstat directory, run `sudo npm install` to install node dependencies.
 
 Usage
 -------
 Enter the Comstat directory and start the server with `npm start`
 
-You should then be able to access Comstat through http://localhost:3234.
+If you see an `EACCES: permission denied` error, you may need to run `sudo chmod 755 db` first.
+
+You should then be able to access Comstat at http://localhost:3234.
 
 
 License
