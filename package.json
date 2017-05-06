@@ -1,6 +1,6 @@
 {
   "name": "Comstat",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "description": "Custom front-end to track Comcast data usage, allowing you to host a simple node.js server to share with roommates/family",
   "repository": {
     "type": "git",
