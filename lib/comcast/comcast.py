@@ -62,7 +62,7 @@ assert res.status_code == 200
 print("Waiting 5 seconds for preload...")
 time.sleep(5)
 
-print("Pulling usage data...")
+print("Getting usage data...")
 res = session.get('https://customer.xfinity.com/MyServices/Internet/UsageMeter/')
 assert res.status_code == 200
 html = res.text
@@ -100,11 +100,6 @@ m = re.search(r'<span data-used="(\d+)"', html)
 if m:
     used = int(m.group(1))
 
-total = None
-m = re.search(r'<div class="cui-usage-bar" data-plan="(\d+)">', html)
-if m:
-    total = int(m.group(1))
-
 unit = None
 m = re.search(r'<div data-component="usage-meter"\s*data-options="([^"]*)"', html)
 if m:
@@ -116,8 +111,7 @@ if m:
 
 print(json.dumps({
     'used': used,
-    'total': total,
-    'unit': unit,
+    'unit': unit
 }))
 
 sys.stdout.flush()

@@ -25,10 +25,15 @@ html
         script(src='socket.io/socket.io.js')
     body
         block content
+        script(src='javascripts/tether.min.js')
         script(src='javascripts/bootstrap-v4-alpha6.js')
-        script(src='javascripts/comstat.js')
-        script.            
-            var socket = io.connect('#{host}', {secure: true});
-            socket.on('updateLoadingStatus', function(data) {
-                $('#loader span').html(data);
-            });
+        if socketHost
+            script.
+                var dataCap = #{dataCap};
+                var socket = io.connect('#{socketHost}', {secure: true});
+                socket.on('updateLoadingStatus', function(data) {
+                    $('#loader span').html(data);
+                });
+            script(src='javascripts/comstat.js')                
+        if !socketHost
+            script(src='javascripts/setup.js')
