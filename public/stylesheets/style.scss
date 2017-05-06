@@ -114,7 +114,7 @@ $logo: '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox
 	&:disabled,
 	.disabled {
 		background-color: $crimson-color-a-50;
-		border-color: $crimson-color-a-50;
+		border-color: transparent;
 	}
 }
 
