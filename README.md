@@ -18,8 +18,6 @@ Requires Node.js and Python 3 with the requests library.
 1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
 2. Inside the Comstat directory, run `npm install` to install node dependencies.
 
-If npm has a hard time installing sqlite3, try [these instructions](https://github.com/mapbox/node-sqlite3/issues/501#issuecomment-192754584).
-
 Usage
 -------
 Enter the Comstat directory and start the server with `npm start`
