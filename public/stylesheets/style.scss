@@ -124,41 +124,44 @@ button {
 
 // Navbar
 nav {
-	padding: .5rem 0rem !important;
+	.navbar {
+		padding: .5rem 0rem !important;
 
-	.navbar-brand {
-	    user-select: none;
-	    -moz-user-select: none;
-	    -webkit-user-select: none;
-	    -ms-user-select: none;
-	    cursor: default;
+		.navbar-brand {
+		    user-select: none;
+		    -moz-user-select: none;
+		    -webkit-user-select: none;
+		    -ms-user-select: none;
+		    cursor: default;
 
-		.logo {
-			width: 30px;
-			height: 30px;
-			display: inline-block !important;
-	    	margin-right: 5px;
-	    }
+			.logo {
+				width: 30px;
+				height: 30px;
+				display: inline-block !important;
+		    	margin-right: 5px;
+		    }
 
-	    .fa {
-	    	margin-right: 10px;
-	    }
-	}
+		    .fa {
+		    	margin-right: 10px;
+		    }
+		}
 
-	.loader {
-		line-height: 2.4em;
-		margin-right: 15px;
-		display: none;
-		opacity: 0.5;
-	}
+		.loader {
+			line-height: 2.4em;
+			margin-right: 15px;
+			display: none;
+			font-size: 0;
+			opacity: 0.5;
+		}
 
-	.btn {
-		padding: 0.5rem 0.75rem;
-		margin-right: 10px;
-		text-align: center;
+		.btn {
+			padding: 0.5rem 0.75rem;
+			margin-right: 10px;
+			text-align: center;
 
-		&:last-of-type {
-			margin-right: 0;
+			&:last-of-type {
+				margin-right: 0;
+			}
 		}
 	}
 }
@@ -166,6 +169,7 @@ nav {
 // Main header
 header {
 	margin-bottom: 0 !important;
+	border-bottom: solid 3px $crimson-color;
 
 	.chart-container {
 		position: absolute;
@@ -297,6 +301,11 @@ header {
 
 // Landscape phones and up
 @media (min-width: 576px) {
+	nav {
+		.loader {
+			font-size: 1em !important;
+		}
+	}
 	header {
 		.chart-container {
 			top: -3.35rem;

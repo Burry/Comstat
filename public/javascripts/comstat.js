@@ -3,12 +3,14 @@ var socket = io.connect();
 socket.on('notifyComcastQuery', function() {
     $(".loader").show();
     $(".fa-refresh").addClass("fa-spin");
+    $("#refresh").prop("disabled",true);
 });
 
 socket.on('updateComcastQuery', function(data) {
     updateStats(data);
     $(".loader").hide();
     $(".fa-refresh").removeClass("fa-spin");
+    $("#refresh").prop("disabled",false);
 });
 
 socket.on('updateComcastQueryStatus', function(data) {
@@ -77,9 +79,5 @@ function reloadComcastQuery() {
 }
 
 $("#refresh").click(function() {
-    reloadComcastQuery();
-});
-
-$(document).ready(function() {
     reloadComcastQuery();
 });
