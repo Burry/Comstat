@@ -72,12 +72,16 @@ function updateStats(data) {
     $(".progress-bar").addClass(progressBarBackground);
 }
 
-function reloadComcastQuery() {
-    $.get("comcast/dataQuery", function(data) {
+function requestComcastQuery() {
+    socket.emit('requestComcastQuery', 'test', function(data) {
         updateStats(data);
     });
 }
 
 $("#refresh").click(function() {
-    reloadComcastQuery();
+    requestComcastQuery();
+});
+
+$(document).ready(function() {
+    requestComcastQuery()
 });
