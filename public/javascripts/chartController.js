@@ -7,6 +7,10 @@ function gimme30() {
     return array;
 }
 
+function setChartHeight() {
+	$(".chart-container").height($(".jumbotron-fluid").css("height"));
+}
+
 $(document).ready(function() {
 	var historyData = [9,24,30,33,45,47,62,81,94,101,117,123,126,180,200,212,232,240,253,263,290,320,326,360,672,682,699,711,860,1024]
 
@@ -64,6 +68,8 @@ $(document).ready(function() {
 		maintainAspectRatio: false
     };
 
+	setChartHeight();
+
     var ctx = $("#chart");
 
     var chart = new Chart(ctx, {
@@ -71,4 +77,8 @@ $(document).ready(function() {
         data: chartData,
         options: chartOptions
     });
+});
+
+$(window).resize(function() {
+	setChartHeight();
 });

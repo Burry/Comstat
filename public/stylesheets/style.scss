@@ -167,12 +167,12 @@ nav {
 header {
 	margin-bottom: 0 !important;
 
-	#chart {
-		width: 102% !important;
-		height: 185px !important;
+	.chart-container {
 		position: absolute;
-		top: -2rem;
-		left: -10px;
+		top: -1.35rem;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	#percent {
@@ -298,11 +298,8 @@ header {
 // Landscape phones and up
 @media (min-width: 576px) {
 	header {
-		#chart {
-			width: 100% !important;
-			height: 255px !important;
-			top: -4rem;
-			left: 0;
+		.chart-container {
+			top: -3.35rem;
 		}
 	}
 	.setup-col {

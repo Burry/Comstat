@@ -55,7 +55,8 @@ block content
 
 	header.jumbotron.jumbotron-fluid
 		.container
-			canvas#chart
+			.chart-container
+				canvas#chart
 			.row
 				.col-6
 					h1#percent=percentInt
@@ -87,5 +88,4 @@ block content
 				} else if (#{percentInt} >= 90) {
 					$(".progress-bar").addClass('bg-danger');
 				}
-	.container.chart-container
 		
