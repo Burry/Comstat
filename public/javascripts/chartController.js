@@ -7,12 +7,16 @@ function gimme30() {
     return array;
 }
 
-function setChartHeight() {
-	$(".chart-container").height($(".jumbotron-fluid").css("height"));
+function setChartSize() {
+	var size = [$(".jumbotron-fluid .container").css("width"), $(".jumbotron-fluid").css("height")]
+	if ($(window).width() >= 576) size[0] = parseInt(size[0].slice(0, -2)) - 30 + 'px';
+	size[1] = parseInt(size[1].slice(0, -2)) + 10 + 'px';
+	$(".chart-container").width(size[0]);
+	$(".chart-container").height(size[1]);
 }
 
 $(document).ready(function() {
-	var historyData = [9,24,30,33,45,47,62,81,94,101,117,123,126,180,200,212,232,240,253,263,290,320,326,360,672,682,699,711,860,1024]
+	var historyData = [9,24,30,33,45,47,62,81,94,101,117,123,126,180,200,212,232,240,253,263,290,320,326,360,672,682,699,711,1024]
 
 	// for (var i = 0; i <= historyData.length; i++) {
 	// 	cumulativeUse[i] = historyData[i].totalUsed;
@@ -22,7 +26,7 @@ $(document).ready(function() {
 	// 	dailyUse[i] = historyData[i].dayUsed;
 	// }
 
-    var chartData = {
+    var data = {
         labels: gimme30(),
         datasets: [{
             type: 'line',
@@ -34,7 +38,7 @@ $(document).ready(function() {
         }]
     };
 
-    var chartOptions = {
+    var options = {
         scales: {
             xAxes: [{
 				ticks: {
@@ -68,17 +72,17 @@ $(document).ready(function() {
 		maintainAspectRatio: false
     };
 
-	setChartHeight();
+	setChartSize();
 
     var ctx = $("#chart");
 
     var chart = new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        options: chartOptions
+        type: 'line',
+        data: data,
+        options: options
     });
 });
 
 $(window).resize(function() {
-	setChartHeight();
+	setChartSize();
 });
