@@ -1,19 +1,19 @@
-function normalAlert(data) {
-    $("#details").css("color", "#292b2c");
-    $("#data_remainder").html(dataCap - data.used);
-    $("#data_remainder_label").html('remaining');
-    $("#data_overage_charges_row").css("display", "none");
-}
+var socket = io.connect();
 
-function overageAlert(data) {
-    var overageCost = Math.ceil((data.used - dataCap + 1) / 50) * 10;
-    overageCost = overageCost >= 200 ? 200 : overageCost;
-    $("#details").css("color", "#D71328");
-    $("#data_remainder").html(data.used - dataCap);
-    $("#data_remainder_label").html('over limit');
-    $("#data_overage_charges").html(overageCost);
-    $("#data_overage_charges_row").css("display", "initial");
-}
+socket.on('notifyComcastQuery', function() {
+    $(".loader").show();
+    $(".fa-refresh").addClass("fa-spin");
+});
+
+socket.on('updateComcastQuery', function(data) {
+    updateStats(data);
+    $(".loader").hide();
+    $(".fa-refresh").removeClass("fa-spin");
+});
+
+socket.on('updateComcastQueryStatus', function(data) {
+    $('nav .loader').html(data);
+});
 
 function daysRemaining() {
     var date = new Date();
@@ -23,7 +23,8 @@ function daysRemaining() {
 }
 
 function updateStats(data) {
-    var percent = 100 * data.used / dataCap;
+    var alertOptions;
+    var percent = 100 * data.totalUsed / dataCap;
     var percentInt = Math.round(percent);
     var progressBarClasses = $(".progress-bar").attr("class").split(/\s+/);
     var progressBarBackground;
@@ -41,40 +42,37 @@ function updateStats(data) {
     });
     if (percent >= 100) {
         percent = 100;
-        overageAlert(data);
+        var overageCost = Math.ceil((data.totalUsed - dataCap + 1) / 50) * 10;
+        alertOptions = {
+            color: '#D71328',
+            label: 'over limit',
+            charges: overageCost >= 200 ? 200 : overageCost,
+            chargesDisplay: 'initial'
+        }
     } else {
-        normalAlert(data);
+        alertOptions = {
+            color: '#292b2c',
+            label: 'remaining',
+            charges: 0,
+            chargesDisplay: 'none'
+        }
     }
+
     $("#percent").html(percentInt + "%");
-    $("#data_used").html(data.used);
-    $("#data_units").html(data.unit);
+    $("#details").css("color", alertOptions.color);
+    $("#data_used").html(data.totalUsed);
+    $("#data_remainder").html(Math.abs(data.totalUsed - dataCap));
+    $("#data_remainder_label").html(alertOptions.label);
+    $("#data_overage_charges").html(alertOptions.charges);
+    $("#data_overage_charges_row").css("display", alertOptions.chargesDisplay);
     $("#days_remaining").html(daysRemaining());
     $(".progress-bar").css("width", percent + "%");
     $(".progress-bar").addClass(progressBarBackground);
 }
 
-function presentDetails() {
-    $("p.lead.loader").hide();
-    $(".preload").show();
-    $(".row").css("display", "flex");
-}
-
-function loadComcastQuery() {
-    $.get("comcast/data", function(data) {
-        updateStats(JSON.parse(data));
-        presentDetails();
-    });
-}
-
 function reloadComcastQuery() {
-    $(".fa-refresh").addClass("fa-spin");
-    $("header .row").addClass("half-transparent");
-    $(".progress-bar").addClass("half-transparent");
-    $.get("comcast/data", function(data) {
-        updateStats(JSON.parse(data));
-        $(".fa-refresh").removeClass("fa-spin");
-        $("header .row").removeClass("half-transparent");
-        $(".progress-bar").removeClass("half-transparent");
+    $.get("comcast/dataQuery", function(data) {
+        updateStats(data);
     });
 }
 
@@ -82,8 +80,6 @@ $("#refresh").click(function() {
     reloadComcastQuery();
 });
 
-setInterval(function(){
+$(document).ready(function() {
     reloadComcastQuery();
-}, 1800000);
-
-loadComcastQuery();
+});

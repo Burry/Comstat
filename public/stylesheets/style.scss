@@ -145,6 +145,13 @@ nav {
 	    }
 	}
 
+	.loader {
+		line-height: 2.4em;
+		margin-right: 15px;
+		display: none;
+		opacity: 0.5;
+	}
+
 	.btn {
 		padding: 0.5rem 0.75rem;
 		margin-right: 10px;
@@ -158,20 +165,19 @@ nav {
 
 // Main header
 header {
-	.loader {
-		margin: 0 auto;
-		text-align: center;
-		min-height: 60px;
+	margin-bottom: 0 !important;
 
-		.fa-spin {
-			margin-right: 5px;
-		}
+	#chart {
+		width: 102% !important;
+		height: 185px !important;
+		position: absolute;
+		top: -2rem;
+		left: -10px;
 	}
 
 	#percent {
 		font-size: 5rem;
 		font-weight: 200;
-		line-height: 0.8;
 		margin-bottom: 15px;
 	}
 
@@ -182,7 +188,6 @@ header {
 		right: 15px;
 	}
 
-	.preload,
 	#data_overage_charges_row {
 		display: none;
 	}
@@ -196,12 +201,15 @@ header {
 	    font-size: 1.25rem;
 	    line-height: 2rem;
 	    text-align: right;
+		display: none;
 	}
 
 	.progress-bar {
 		height: 2rem !important;
+		display: none;
 	}
 }
+
 
 // Setup page
 .setup-col {
@@ -289,6 +297,14 @@ header {
 
 // Landscape phones and up
 @media (min-width: 576px) {
+	header {
+		#chart {
+			width: 100% !important;
+			height: 255px !important;
+			top: -4rem;
+			left: 0;
+		}
+	}
 	.setup-col {
 		padding-top: 1.6em;
 		.setup-box {

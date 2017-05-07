@@ -22,18 +22,18 @@ html
         link(rel='shortcut icon', href='images/favicon.ico')
 
         script(src='javascripts/jquery-3.2.1.min.js')
-        script(src='socket.io/socket.io.js')
+        if main
+            script(src='socket.io/socket.io.js')
+            script(src='javascripts/Chart.bundle.min.js')
     body
         block content
         script(src='javascripts/tether.min.js')
         script(src='javascripts/bootstrap-v4-alpha6.js')
-        if dataCap
+        if main
             script.
                 var dataCap = #{dataCap};
-                var socket = io.connect();
-                socket.on('updateLoadingStatus', function(data) {
-                    $('p.lead.loader span').html(data);
-                });
+                /*var historyData = [#{historyData}];*/
+            script(src='javascripts/chartController.js')
             script(src='javascripts/comstat.js')                
-        if !dataCap
+        if !main
             script(src='javascripts/setup.js')
