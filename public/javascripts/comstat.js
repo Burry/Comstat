@@ -90,8 +90,8 @@ $(document).ready(function() {
             type: 'line',
             fill: true,
             backgroundColor: 'rgb(215, 19, 40)',
-            borderColor: 'rgb(215, 19, 40)',
-            borderWidth: 2,
+            borderColor: 'rgba(0, 0, 0, 0)',
+            borderWidth: 0,
             data: cumulativeUse
         }]
     };
