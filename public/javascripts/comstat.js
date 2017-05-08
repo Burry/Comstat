@@ -1,9 +1,19 @@
-var socket = io.connect();
+var socket = io.connect({transports: ['websocket', 'polling']});
 
-socket.on('notifyComcastQuery', function() {
+$("#refresh").click(function() {
+    socket.emit('requestComcastQuery', null, function(data) {
+        updateStats(data);
+    });
+});
+
+function showLoading() {
     $(".loader").show();
     $(".fa-refresh").addClass("fa-spin");
     $("#refresh").prop("disabled",true);
+}
+
+socket.on('notifyComcastQuery', function() {
+    showLoading();
 });
 
 socket.on('updateComcastQuery', function(data) {
@@ -15,6 +25,7 @@ socket.on('updateComcastQuery', function(data) {
 
 socket.on('updateComcastQueryStatus', function(data) {
     $('nav .loader').html(data);
+    showLoading();
 });
 
 function daysRemaining() {
@@ -76,10 +87,8 @@ function setChartSize() {
 }
 
 $(document).ready(function() {
-    requestComcastQuery()
-
 	var cumulativeUse = [];
-	var recordedDate = j = dailyUsageData[0]._id - 2;
+	var recordedDate = j = dailyUsageData[0]._id - 1;
 	for (var i = 0; i < recordedDate; i++) {
 		cumulativeUse[i] = 0;
 		if (dailyUsageData[i]) cumulativeUse[j] = dailyUsageData[i].totalUsed;
@@ -92,8 +101,8 @@ $(document).ready(function() {
             type: 'line',
             fill: true,
             backgroundColor: 'rgb(215, 19, 40)',
-            borderColor: 'rgb(215, 19, 40)',
-            borderWidth: 2,
+            borderColor: 'rgba(0, 0, 0, 0)',
+            borderWidth: 0,
             data: cumulativeUse
         }]
     };
@@ -143,16 +152,6 @@ $(document).ready(function() {
     });
 });
 
-function requestComcastQuery() {
-    socket.emit('requestComcastQuery', null, function(data) {
-        updateStats(data);
-    });
-}
-
 $(window).resize(function() {
 	setChartSize();
-});
-
-$("#refresh").click(function() {
-    requestComcastQuery();
 });
