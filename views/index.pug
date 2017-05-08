@@ -35,10 +35,9 @@ block content
 			.chart-container
 				canvas#chart
 			.row
-				.col-6
+				.col-12
 					h1#percent=percentInt
 						| %
-				.col-6
 					#details
 						span#data_used=lastUsageData.totalUsed
 						| /
@@ -54,5 +53,3 @@ block content
 							br
 						span#days_remaining=days_remaining
 						|  days until reset
-					.clearfix
-		

@@ -180,22 +180,23 @@ header {
 
 	.row {
 		pointer-events: none;
-		
+
 		#percent {
+			display: inline-block;
+			margin-right: 15px;
 			font-size: 5rem;
+			line-height: 4rem;
 			font-weight: 200;
-			margin-bottom: 3px;
+			margin-bottom: 15px;
 		}
 
 		#details {
-			padding: 0.5em;
-			margin-top: 10px;
-			float: right;
-			font-size: 0.8em;
-			line-height: 1.4em;
-			text-align: right;
-			max-width: 125px;
+			display: inline-block;
+			padding: 0.5rem;
+			line-height: 1.4rem;
+			max-width: 160px;
 			border-radius: 5px;
+			margin-bottom: 2px;
 			background: rgba(255, 255, 255, 0.75);
 			-webkit-backdrop-filter: blur(3px);
 
@@ -306,13 +307,10 @@ header {
 		}
 		.row {
 			#percent {
-				margin-top: 7px;
+				margin-bottom: 0;
 			}
 			#details {
-				max-width: 170px;
-				padding: 1em;
-				margin-top: 1px;
-				font-size: 1em;
+				margin-bottom: 0;
 			}
 		}
 	}
