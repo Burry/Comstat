@@ -28,17 +28,13 @@ socket.on('updateComcastQueryStatus', function(data) {
     showLoading();
 });
 
-function daysRemaining() {
-    var date = new Date();
-    var firstofNextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-    var timeDiff = Math.abs(firstofNextMonth.getTime() - date.getTime());
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
-}
-
 function updateStats(data) {
     var alertOptions;
     var percent = 100 * data.totalUsed / dataCap;
     var percentInt = Math.round(percent);
+    var today = moment().date();
+    var daysUntilReset = moment().daysInMonth() - today + 1;
+
     if (percent >= 100) {
         percent = 100;
         var overageCost = Math.ceil((data.totalUsed - dataCap + 1) / 50) * 10;
@@ -64,16 +60,15 @@ function updateStats(data) {
     $("#data_remainder_label").html(alertOptions.label);
     $("#data_overage_charges").html(alertOptions.charges);
     $("#data_overage_charges_row").css("display", alertOptions.chargesDisplay);
-    $("#days_remaining").html(daysRemaining());
+    $("#days_remaining").html(daysUntilReset);
 }
 
 function gimme30() {
     var array = [];
-    var m = new Date().getMonth();
-	var y = new Date().getYear();
-	var daysInMonth = new Date(y, m, 0).getDate();
-    for (var i = 1; i <= daysInMonth; i++) {
-        array.push(m + '/' + i)
+    var month = moment().month() + 1;
+	var daysInMonth = moment().daysInMonth();
+    for (var day = 1; day <= daysInMonth; day++) {
+        array.push(month + '/' + day)
     }
     return array;
 }

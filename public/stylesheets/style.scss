@@ -170,6 +170,10 @@ nav {
 header {
 	margin-bottom: 0 !important;
 	border-bottom: solid 3px $crimson-color;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	-webkit-user-drag: none;
 
 	.chart-container {
 		position: absolute;

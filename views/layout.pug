@@ -22,13 +22,13 @@ html
         link(rel='shortcut icon', href='images/favicon.ico')
 
         script(src='javascripts/jquery-3.2.1.min.js')
-        if main
-            script(src='socket.io/socket.io.js')
-            script(src='javascripts/Chart.bundle.min.js')
     body
         block content
         script(src='javascripts/bootstrap-v4-alpha6.js')
         if main
+            script(src='socket.io/socket.io.js')
+            script(src='javascripts/moment.min.js')
+            script(src='javascripts/chart.min.js')
             script.
                 var dataCap = #{dataCap};
                 var dailyUsageData = !{dailyUsageData};
