@@ -39,7 +39,7 @@ block content
 					h1#percent=percentInt
 						| %
 				.col-6
-					p#details
+					#details
 						span#data_used=lastUsageData.totalUsed
 						| /
 						span#data_total=dataCap
@@ -54,4 +54,5 @@ block content
 							br
 						span#days_remaining=days_remaining
 						|  days until reset
+					.clearfix
 		

@@ -181,14 +181,17 @@ header {
 	#percent {
 		font-size: 5rem;
 		font-weight: 200;
-		margin-bottom: 0;
+		margin-bottom: 3px;
 	}
 
 	#details {
+		padding: 0.5em;
+		margin-top: 10px;
+		float: right;
+		font-size: 0.8em;
+		line-height: 1.4em;
 		text-align: right;
-		position: absolute;
-		right: 15px;
-		padding: 1em;
+		max-width: 125px;
 		border-radius: 5px;
 		background: rgba(255, 255, 255, 0.75);
 		-webkit-backdrop-filter: blur(3px);
@@ -299,6 +302,15 @@ header {
 		.chart-container {
 			top: -4rem;
 			padding: 0 15px;
+		}
+		#percent {
+			margin-top: 7px;
+		}
+		#details {
+			max-width: 170px;
+			padding: 1em;
+			margin-top: 1px;
+			font-size: 1em;
 		}
 	}
 	.setup-col {
