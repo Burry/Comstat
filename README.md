@@ -20,18 +20,21 @@ Preview
 
 Installation
 -------
-Requires Node.js and Python 3 with the requests library.
-1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
-2. Inside the Comstat directory, run `sudo npm install` to install node dependencies.
-3. Create the database directory in your root folder with `sudo mkdir -p /data/db && sudo chown -R $USER /data/db`.
+Requires [Node.js](https://nodejs.org/en/download/), [MongoDB](https://docs.mongodb.com/manual/installation/), and [Python 3](https://www.python.org/downloads/) with the [requests](http://docs.python-requests.org/en/master/user/install/) library. Follow those links to install them if you haven't already.
 
-If you'd like, you can use a different directory, but then you must ensure that Mongo has permissions to it, and you must update the path in the pre- and post- start scripts in package.json, unless you wish to start Mongo separately from Comstat.
+1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
+2. Create the database directory in your root folder with `sudo mkdir -p /data/db && sudo chown -R $USER /data/db`
+3. Inside the Comstat directory, run `sudo npm install` to install node dependencies.
+
+If you'd like, you can use a different database directory, but then you must ensure that Mongo has permissions to it, and you must update the path in the pre- and post- start scripts in package.json, unless you wish to start Mongo separately from Comstat.
 
 Usage
 -------
-Enter the Comstat directory and start the server with `npm start`
+Enter the Comstat directory, and start the node server and database together with `npm start`
 
-You should then be able to access Comstat at [http://localhost:3234]().
+If you'd like to start them separately (i.e. you already use Mongo for something else), Comstat can be started with `node app.js` and MongoDB with `mongod`
+
+You should then be able to access Comstat at [http://localhost:3234](http://localhost:3234).
 
 
 License
