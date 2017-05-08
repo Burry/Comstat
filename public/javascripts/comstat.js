@@ -6,10 +6,14 @@ $("#refresh").click(function() {
     });
 });
 
-socket.on('notifyComcastQuery', function() {
+function showLoading() {
     $(".loader").show();
     $(".fa-refresh").addClass("fa-spin");
     $("#refresh").prop("disabled",true);
+}
+
+socket.on('notifyComcastQuery', function() {
+    showLoading();
 });
 
 socket.on('updateComcastQuery', function(data) {
@@ -21,6 +25,7 @@ socket.on('updateComcastQuery', function(data) {
 
 socket.on('updateComcastQueryStatus', function(data) {
     $('nav .loader').html(data);
+    showLoading();
 });
 
 function daysRemaining() {
