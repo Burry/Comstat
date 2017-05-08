@@ -178,31 +178,32 @@ header {
 		height: 100%;
 	}
 
-	#percent {
-		font-size: 5rem;
-		font-weight: 200;
-		margin-bottom: 3px;
-	}
+	.row {
+		pointer-events: none;
+		
+		#percent {
+			font-size: 5rem;
+			font-weight: 200;
+			margin-bottom: 3px;
+		}
 
-	#details {
-		padding: 0.5em;
-		margin-top: 10px;
-		float: right;
-		font-size: 0.8em;
-		line-height: 1.4em;
-		text-align: right;
-		max-width: 125px;
-		border-radius: 5px;
-		background: rgba(255, 255, 255, 0.75);
-		-webkit-backdrop-filter: blur(3px);
-	}
+		#details {
+			padding: 0.5em;
+			margin-top: 10px;
+			float: right;
+			font-size: 0.8em;
+			line-height: 1.4em;
+			text-align: right;
+			max-width: 125px;
+			border-radius: 5px;
+			background: rgba(255, 255, 255, 0.75);
+			-webkit-backdrop-filter: blur(3px);
 
-	#data_overage_charges_row {
-		display: none;
-	}
-
-	#data_overage_charges_row {
-		font-weight: bold;
+			#data_overage_charges_row {
+				display: none;
+				font-weight: bold;
+			}
+		}
 	}
 }
 
@@ -303,14 +304,16 @@ header {
 			top: -4rem;
 			padding: 0 15px;
 		}
-		#percent {
-			margin-top: 7px;
-		}
-		#details {
-			max-width: 170px;
-			padding: 1em;
-			margin-top: 1px;
-			font-size: 1em;
+		.row {
+			#percent {
+				margin-top: 7px;
+			}
+			#details {
+				max-width: 170px;
+				padding: 1em;
+				margin-top: 1px;
+				font-size: 1em;
+			}
 		}
 	}
 	.setup-col {

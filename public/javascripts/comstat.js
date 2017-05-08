@@ -112,6 +112,7 @@ $(document).ready(function() {
     };
 
     var options = {
+        maintainAspectRatio: false,
         scales: {
             xAxes: [{
                 ticks: {
@@ -137,12 +138,22 @@ $(document).ready(function() {
         legend: {
             display: false
         },
+        tooltips: {
+            mode: 'x-axis',
+            intersect: false,
+            displayColors: false,
+            cornerRadius: 5,
+            callbacks: {
+                label: function(tooltipItems) {
+                    return tooltipItems.yLabel + ' GB';
+                }
+            }
+        },
         elements: {
             point: {
                 radius: 0
             }
-        },
-		maintainAspectRatio: false
+        }
     };
 
 	setChartSize();
