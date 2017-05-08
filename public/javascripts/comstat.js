@@ -81,6 +81,7 @@ function gimme30() {
 function setChartSize() {
 	var size = [$(".jumbotron-fluid .container").css("width"), $(".jumbotron-fluid").css("height")]
 	if ($(window).width() >= 576) size[0] = parseInt(size[0].slice(0, -2)) - 30 + 'px';
+    else size[0] = parseInt(size[0].slice(0, -2)) + 10 + 'px';
 	size[1] = parseInt(size[1].slice(0, -2)) + 10 + 'px';
 	$(".chart-container").width(size[0]);
 	$(".chart-container").height(size[1]);

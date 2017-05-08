@@ -173,8 +173,8 @@ header {
 
 	.chart-container {
 		position: absolute;
-		top: -2rem;
-		left: 0;
+		top: -2.01rem;
+		left: -10px;
 		height: 100%;
 	}
 
@@ -192,13 +192,9 @@ header {
 
 		#details {
 			display: inline-block;
-			padding: 0.5rem;
 			line-height: 1.4rem;
 			max-width: 160px;
-			border-radius: 5px;
 			margin-bottom: 2px;
-			background: rgba(255, 255, 255, 0.75);
-			-webkit-backdrop-filter: blur(3px);
 
 			#data_overage_charges_row {
 				display: none;
@@ -302,7 +298,8 @@ header {
 	}
 	header {
 		.chart-container {
-			top: -4rem;
+			top: -4.01rem;
+			left: 0;
 			padding: 0 15px;
 		}
 		.row {
