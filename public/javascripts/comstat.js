@@ -1,4 +1,4 @@
-var socket = io.connect();
+var socket = io.connect({transports: ['websocket', 'polling']});
 
 $("#refresh").click(function() {
     socket.emit('requestComcastQuery', null, function(data) {
