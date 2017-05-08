@@ -124,54 +124,63 @@ button {
 
 // Navbar
 nav {
-	padding: .5rem 0rem !important;
+	.navbar {
+		padding: .5rem 0rem !important;
 
-	.navbar-brand {
-	    user-select: none;
-	    -moz-user-select: none;
-	    -webkit-user-select: none;
-	    -ms-user-select: none;
-	    cursor: default;
+		.navbar-brand {
+		    user-select: none;
+		    -moz-user-select: none;
+		    -webkit-user-select: none;
+		    -ms-user-select: none;
+		    cursor: default;
 
-		.logo {
-			width: 30px;
-			height: 30px;
-			display: inline-block !important;
-	    	margin-right: 5px;
-	    }
+			.logo {
+				width: 30px;
+				height: 30px;
+				display: inline-block !important;
+		    	margin-right: 5px;
+		    }
 
-	    .fa {
-	    	margin-right: 10px;
-	    }
-	}
+		    .fa {
+		    	margin-right: 10px;
+		    }
+		}
 
-	.btn {
-		padding: 0.5rem 0.75rem;
-		margin-right: 10px;
-		text-align: center;
+		.loader {
+			line-height: 2.4em;
+			margin-right: 15px;
+			display: none;
+			font-size: 0;
+			opacity: 0.5;
+		}
 
-		&:last-of-type {
-			margin-right: 0;
+		.btn {
+			padding: 0.5rem 0.75rem;
+			margin-right: 10px;
+			text-align: center;
+
+			&:last-of-type {
+				margin-right: 0;
+			}
 		}
 	}
 }
 
 // Main header
 header {
-	.loader {
-		margin: 0 auto;
-		text-align: center;
-		min-height: 60px;
+	margin-bottom: 0 !important;
+	border-bottom: solid 3px $crimson-color;
 
-		.fa-spin {
-			margin-right: 5px;
-		}
+	.chart-container {
+		position: absolute;
+		top: -2rem;
+		left: 0;
+		height: 100%;
 	}
 
 	#percent {
 		font-size: 5rem;
 		font-weight: 200;
-		line-height: 0.8;
 		margin-bottom: 15px;
 	}
 
@@ -182,7 +191,6 @@ header {
 		right: 15px;
 	}
 
-	.preload,
 	#data_overage_charges_row {
 		display: none;
 	}
@@ -190,18 +198,8 @@ header {
 	#data_overage_charges_row {
 		font-weight: bold;
 	}
-
-	.progress {
-	    background: #fff !important;
-	    font-size: 1.25rem;
-	    line-height: 2rem;
-	    text-align: right;
-	}
-
-	.progress-bar {
-		height: 2rem !important;
-	}
 }
+
 
 // Setup page
 .setup-col {
@@ -289,6 +287,17 @@ header {
 
 // Landscape phones and up
 @media (min-width: 576px) {
+	nav {
+		.loader {
+			font-size: 1em !important;
+		}
+	}
+	header {
+		.chart-container {
+			top: -4rem;
+			padding: 0 15px;
+		}
+	}
 	.setup-col {
 		padding-top: 1.6em;
 		.setup-box {

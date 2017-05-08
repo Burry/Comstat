@@ -1,14 +1,18 @@
 {
   "name": "Comstat",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Custom front-end to track Comcast data usage, allowing you to host a simple node.js server to share with roommates/family",
   "repository": {
     "type": "git",
     "url": "https://github.com/Burry/Comstat.git"
   },
   "scripts": {
+    "prestart": "mongod --dbpath=/data/db --fork --logpath /dev/null",
     "start": "node app.js",
-    "test": "nodemon app.js"
+    "poststop": "mongo --eval 'db.shutdownServer()' > /dev/null",
+    "pretest": "mongod --dbpath=/data/db --fork --logpath /dev/null",
+    "test": "nodemon app.js",
+    "posttest": "mongo --eval 'db.shutdownServer()' > /dev/null"
   },
   "keywords": [
     "comcast",
@@ -21,11 +25,12 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.2.26",
     "morgan": "~1.8.1",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2",
-    "socket.io": "^1.7.3",
-    "tingodb": "^0.5.1"
+    "socket.io": "^1.7.3"
   },
   "license": "MIT"
 }

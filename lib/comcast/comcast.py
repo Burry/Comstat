@@ -98,20 +98,6 @@ html = res.text
 used = None
 m = re.search(r'<span data-used="(\d+)"', html)
 if m:
-    used = int(m.group(1))
-
-unit = None
-m = re.search(r'<div data-component="usage-meter"\s*data-options="([^"]*)"', html)
-if m:
-    opts = m.group(1)
-    opts = re.sub(r'\s+', '', opts)  # remove whitespace
-    m = re.search(r'unit:(\w+);', opts)
-    if m:
-        unit = m.group(1)
-
-print(json.dumps({
-    'used': used,
-    'unit': unit
-}))
+    print(int(m.group(1)))
 
 sys.stdout.flush()

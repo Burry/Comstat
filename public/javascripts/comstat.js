@@ -1,19 +1,21 @@
-function normalAlert(data) {
-    $("#details").css("color", "#292b2c");
-    $("#data_remainder").html(dataCap - data.used);
-    $("#data_remainder_label").html('remaining');
-    $("#data_overage_charges_row").css("display", "none");
-}
+var socket = io.connect();
 
-function overageAlert(data) {
-    var overageCost = Math.ceil((data.used - dataCap + 1) / 50) * 10;
-    overageCost = overageCost >= 200 ? 200 : overageCost;
-    $("#details").css("color", "#D71328");
-    $("#data_remainder").html(data.used - dataCap);
-    $("#data_remainder_label").html('over limit');
-    $("#data_overage_charges").html(overageCost);
-    $("#data_overage_charges_row").css("display", "initial");
-}
+socket.on('notifyComcastQuery', function() {
+    $(".loader").show();
+    $(".fa-refresh").addClass("fa-spin");
+    $("#refresh").prop("disabled",true);
+});
+
+socket.on('updateComcastQuery', function(data) {
+    $(".loader").hide();
+    $(".fa-refresh").removeClass("fa-spin");
+    $("#refresh").prop("disabled",false);
+    updateStats(data);
+});
+
+socket.on('updateComcastQueryStatus', function(data) {
+    $('nav .loader').html(data);
+});
 
 function daysRemaining() {
     var date = new Date();
@@ -23,67 +25,134 @@ function daysRemaining() {
 }
 
 function updateStats(data) {
-    var percent = 100 * data.used / dataCap;
+    var alertOptions;
+    var percent = 100 * data.totalUsed / dataCap;
     var percentInt = Math.round(percent);
-    var progressBarClasses = $(".progress-bar").attr("class").split(/\s+/);
-    var progressBarBackground;
-    if (percentInt >= 50 && percentInt < 70) {
-        progressBarBackground = 'bg-success';
-    } else if (percentInt >= 70 && percentInt < 90) {
-        progressBarBackground = 'bg-warning';
-    } else if (percentInt >= 90) {
-        progressBarBackground = 'bg-danger';
-    }
-    $.each(progressBarClasses, function(index, item) {
-        if (item.startsWith('bg-')) {
-            $(".progress-bar").removeClass(item);
-        }
-    });
     if (percent >= 100) {
         percent = 100;
-        overageAlert(data);
+        var overageCost = Math.ceil((data.totalUsed - dataCap + 1) / 50) * 10;
+        alertOptions = {
+            color: '#D71328',
+            label: 'over limit',
+            charges: overageCost >= 200 ? 200 : overageCost,
+            chargesDisplay: 'initial'
+        }
     } else {
-        normalAlert(data);
+        alertOptions = {
+            color: '#292b2c',
+            label: 'remaining',
+            charges: 0,
+            chargesDisplay: 'none'
+        }
     }
+
     $("#percent").html(percentInt + "%");
-    $("#data_used").html(data.used);
-    $("#data_units").html(data.unit);
+    $("#details").css("color", alertOptions.color);
+    $("#data_used").html(data.totalUsed);
+    $("#data_remainder").html(Math.abs(data.totalUsed - dataCap));
+    $("#data_remainder_label").html(alertOptions.label);
+    $("#data_overage_charges").html(alertOptions.charges);
+    $("#data_overage_charges_row").css("display", alertOptions.chargesDisplay);
     $("#days_remaining").html(daysRemaining());
-    $(".progress-bar").css("width", percent + "%");
-    $(".progress-bar").addClass(progressBarBackground);
 }
 
-function presentDetails() {
-    $("p.lead.loader").hide();
-    $(".preload").show();
-    $(".row").css("display", "flex");
+function gimme30() {
+    var array = [];
+    var m = new Date().getMonth();
+	var y = new Date().getYear();
+	var daysInMonth = new Date(y, m, 0).getDate();
+    for (var i = 1; i <= daysInMonth; i++) {
+        array.push(m + '/' + i)
+    }
+    return array;
 }
 
-function loadComcastQuery() {
-    $.get("comcast/data", function(data) {
-        updateStats(JSON.parse(data));
-        presentDetails();
+function setChartSize() {
+	var size = [$(".jumbotron-fluid .container").css("width"), $(".jumbotron-fluid").css("height")]
+	if ($(window).width() >= 576) size[0] = parseInt(size[0].slice(0, -2)) - 30 + 'px';
+	size[1] = parseInt(size[1].slice(0, -2)) + 10 + 'px';
+	$(".chart-container").width(size[0]);
+	$(".chart-container").height(size[1]);
+}
+
+$(document).ready(function() {
+    requestComcastQuery()
+
+	var cumulativeUse = [];
+	var recordedDate = j = dailyUsageData[0]._id - 2;
+	for (var i = 0; i < recordedDate; i++) {
+		cumulativeUse[i] = 0;
+		if (dailyUsageData[i]) cumulativeUse[j] = dailyUsageData[i].totalUsed;
+		j++;
+	}
+
+    var data = {
+        labels: gimme30(),
+        datasets: [{
+            type: 'line',
+            fill: true,
+            backgroundColor: 'rgb(215, 19, 40)',
+            borderColor: 'rgb(215, 19, 40)',
+            borderWidth: 2,
+            data: cumulativeUse
+        }]
+    };
+
+    var options = {
+        scales: {
+            xAxes: [{
+                ticks: {
+                    display: false
+                },
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    display: false,
+                    beginAtZero:true,
+                    max: 1024
+                },
+                gridLines: {
+                    display: false,
+                    drawBorder: false
+                }
+            }]
+        },
+        legend: {
+            display: false
+        },
+        elements: {
+            point: {
+                radius: 0
+            }
+        },
+		maintainAspectRatio: false
+    };
+
+	setChartSize();
+
+    var ctx = $("#chart");
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
     });
-}
-
-function reloadComcastQuery() {
-    $(".fa-refresh").addClass("fa-spin");
-    $("header .row").addClass("half-transparent");
-    $(".progress-bar").addClass("half-transparent");
-    $.get("comcast/data", function(data) {
-        updateStats(JSON.parse(data));
-        $(".fa-refresh").removeClass("fa-spin");
-        $("header .row").removeClass("half-transparent");
-        $(".progress-bar").removeClass("half-transparent");
-    });
-}
-
-$("#refresh").click(function() {
-    reloadComcastQuery();
 });
 
-setInterval(function(){
-    reloadComcastQuery();
-}, 1800000);
+function requestComcastQuery() {
+    socket.emit('requestComcastQuery', null, function(data) {
+        updateStats(data);
+    });
+}
 
-loadComcastQuery();
+$(window).resize(function() {
+	setChartSize();
+});
+
+$("#refresh").click(function() {
+    requestComcastQuery();
+});

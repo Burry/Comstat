@@ -1,8 +1,8 @@
 extends layout
 
 block content
-	.container
-		nav.navbar.navbar-toggleable-xl.navbar-light.navbar-static-top
+	nav.container
+		.navbar.navbar-toggleable-xl.navbar-light.navbar-static-top
 			button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#nav-content', aria-controls='nav-content', aria-expanded='false', aria-label='Toggle navigation')
 				span.navbar-toggler-icon
 			span.navbar-brand
@@ -13,59 +13,45 @@ block content
 				| Comstat
 
 			.collapse.navbar-collapse.justify-content-end
+				.loader
 				button#refresh.btn.btn-secondary.preload(type='button')
 					i.fa.fa-refresh(aria-hidden='true')
-				//- button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#notificationsModal')
-				//- 	i.fa.fa-bell(aria-hidden='true')
-
-
-	//- #notificationsModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='notificationsModalLabel', aria-hidden='true')
-	//- 	.modal-dialog(role='document')
-	//- 		.modal-content
-	//- 			form#phoneForm(method='post')
-	//- 				.modal-header
-	//- 					h5#notificationsModalLabel.modal-title Notifications
-	//- 					|
-	//- 					button.close(type='button', data-dismiss='modal', aria-label='Close')
-	//- 						span(aria-hidden='true') &times;
-	//- 				.modal-body
-	//- 					p
-	//- 					    strong TESTING:
-	//- 					    | Developing a basic notification system.
-	//- 					.input-group
-	//- 					    span#phone-input-addon.input-group-addon
-	//- 					        i.fa.fa-phone(aria-hidden='true')
-	//- 					    input#phone.form-control(type='tel', name='phone', aria-describedby='phone-input-addon')
-	//- 				.modal-footer
-	//- 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
-	//- 					input.btn.btn-primary(type='submit', value='Save')
+	-
+		
+		var date = new Date();
+		var firstofNextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+		var timeDiff = Math.abs(firstofNextMonth.getTime() - date.getTime());
+		var days_remaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		
+		var percent = 100 * lastUsageData.totalUsed / dataCap;
+		var percentInt = Math.round(percent);
+		var data_remainder = Math.abs(dataCap - lastUsageData.totalUsed);
+		var data_remainder_label = lastUsageData.totalUsed > dataCap ? 'over limit' : 'remaining';
+		var data_overage_charges = Math.ceil((lastUsageData.totalUsed - dataCap + 1) / 50) * 10;
+		var data_overage_charges = data_overage_charges >= 200 ? 200 : data_overage_charges;
 
 	header.jumbotron.jumbotron-fluid
 		.container
-			p.lead.loader
-				i.fa.fa-spin.fa-circle-o-notch(aria-hidden='true')
-				br
-				span
-			.row.preload
+			.chart-container
+				canvas#chart
+			.row
 				.col-6
-					h1#percent
+					h1#percent=percentInt
+						| %
 				.col-6
 					p#details
-						span#data_used
+						span#data_used=lastUsageData.totalUsed
 						| /
 						span#data_total=dataCap
 						| &nbsp;GB
 						br
-						span#data_remainder
-						| &nbsp;
-						span#data_units
-						| &nbsp;
-						span#data_remainder_label
+						span#data_remainder=data_remainder
+						| &nbsp;GB&nbsp;
+						span#data_remainder_label=data_remainder_label
 						br
 						span#data_overage_charges_row + $
-							span#data_overage_charges
+							span#data_overage_charges=data_overage_charges
 							br
-						span#days_remaining
+						span#days_remaining=days_remaining
 						|  days until reset
-			#data_progress.progress.preload
-				.progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+		
