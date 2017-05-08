@@ -32,8 +32,7 @@ html
         if main
             script.
                 var dataCap = #{dataCap};
-                /*var historyData = [#{historyData}];*/
-            script(src='javascripts/chartController.js')
+                var dailyUsageData = !{dailyUsageData};
             script(src='javascripts/comstat.js')                
         if !main
             script(src='javascripts/setup.js')

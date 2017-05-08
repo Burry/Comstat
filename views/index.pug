@@ -16,41 +16,18 @@ block content
 				.loader
 				button#refresh.btn.btn-secondary.preload(type='button')
 					i.fa.fa-refresh(aria-hidden='true')
-				//- button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#notificationsModal')
-				//- 	i.fa.fa-bell(aria-hidden='true')
-
-
-	//- #notificationsModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='notificationsModalLabel', aria-hidden='true')
-	//- 	.modal-dialog(role='document')
-	//- 		.modal-content
-	//- 			form#phoneForm(method='post')
-	//- 				.modal-header
-	//- 					h5#notificationsModalLabel.modal-title Notifications
-	//- 					|
-	//- 					button.close(type='button', data-dismiss='modal', aria-label='Close')
-	//- 						span(aria-hidden='true') &times;
-	//- 				.modal-body
-	//- 					p
-	//- 					    strong TESTING:
-	//- 					    | Developing a basic notification system.
-	//- 					.input-group
-	//- 					    span#phone-input-addon.input-group-addon
-	//- 					        i.fa.fa-phone(aria-hidden='true')
-	//- 					    input#phone.form-control(type='tel', name='phone', aria-describedby='phone-input-addon')
-	//- 				.modal-footer
-	//- 					button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
-	//- 					input.btn.btn-primary(type='submit', value='Save')
-
 	-
+		
 		var date = new Date();
 		var firstofNextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 		var timeDiff = Math.abs(firstofNextMonth.getTime() - date.getTime());
 		var days_remaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
-		var percent = 100 * currentData.totalUsed / dataCap;
+		
+		var percent = 100 * lastUsageData.totalUsed / dataCap;
 		var percentInt = Math.round(percent);
-		var data_remainder = Math.abs(dataCap - currentData.totalUsed);
-		var data_remainder_label = currentData.totalUsed > dataCap ? 'over limit' : 'remaining';
-		var data_overage_charges = Math.ceil((currentData.totalUsed - dataCap + 1) / 50) * 10;
+		var data_remainder = Math.abs(dataCap - lastUsageData.totalUsed);
+		var data_remainder_label = lastUsageData.totalUsed > dataCap ? 'over limit' : 'remaining';
+		var data_overage_charges = Math.ceil((lastUsageData.totalUsed - dataCap + 1) / 50) * 10;
 		var data_overage_charges = data_overage_charges >= 200 ? 200 : data_overage_charges;
 
 	header.jumbotron.jumbotron-fluid
@@ -63,7 +40,7 @@ block content
 						| %
 				.col-6
 					p#details
-						span#data_used=currentData.totalUsed
+						span#data_used=lastUsageData.totalUsed
 						| /
 						span#data_total=dataCap
 						| &nbsp;GB
@@ -77,15 +54,4 @@ block content
 							br
 						span#days_remaining=days_remaining
 						|  days until reset
-			#data_progress.progress
-				.progress-bar.progress-bar-striped.progress-bar-animated(role='progressbar', aria-valuenow='#{percent}', aria-valuemin='0', aria-valuemax='100')
-			script.
-				$(".progress-bar").css("width", #{percent} + "%");
-				if (#{percentInt} >= 50 && #{percentInt} < 70) {
-					$(".progress-bar").addClass('bg-success');
-				} else if (#{percentInt} >= 70 && #{percentInt} < 90) {
-					$(".progress-bar").addClass('bg-warning');
-				} else if (#{percentInt} >= 90) {
-					$(".progress-bar").addClass('bg-danger');
-				}
 		
