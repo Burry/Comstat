@@ -90,11 +90,14 @@ $(document).ready(function() {
 	var cumulativeUse = [];
 	var firstRecordDate = dailyUsageData[0]._id;
     var lastRecordDate = dailyUsageData[dailyUsageData.length - 1]._id;
-	for (var i = 0; i < lastRecordDate; i++) {
-		cumulativeUse[i] = 0;
-		if (dailyUsageData[i]) cumulativeUse[firstRecordDate-1] = dailyUsageData[i].totalUsed;
-		firstRecordDate++;
-	}
+    var dataIndex = firstRecordDate - 1;
+
+	for (var i = 0; i <= lastRecordDate; i++) {
+        if (i < firstRecordDate-1) cumulativeUse[i] = 0;
+        if (dailyUsageData[i])
+            cumulativeUse[dataIndex] = dailyUsageData[i].totalUsed;
+        dataIndex++;
+    }
 
     var data = {
         labels: gimme30(),
