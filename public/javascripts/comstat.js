@@ -88,11 +88,12 @@ function setChartSize() {
 
 $(document).ready(function() {
 	var cumulativeUse = [];
-	var recordedDate = j = dailyUsageData[0]._id - 1;
-	for (var i = 0; i < recordedDate; i++) {
+	var firstRecordDate = dailyUsageData[0]._id;
+    var lastRecordDate = dailyUsageData[dailyUsageData.length - 1]._id;
+	for (var i = 0; i < lastRecordDate; i++) {
 		cumulativeUse[i] = 0;
-		if (dailyUsageData[i]) cumulativeUse[j] = dailyUsageData[i].totalUsed;
-		j++;
+		if (dailyUsageData[i]) cumulativeUse[firstRecordDate-1] = dailyUsageData[i].totalUsed;
+		firstRecordDate++;
 	}
 
     var data = {

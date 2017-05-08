@@ -181,14 +181,17 @@ header {
 	#percent {
 		font-size: 5rem;
 		font-weight: 200;
-		margin-bottom: 15px;
+		margin-bottom: 0;
 	}
 
 	#details {
 		text-align: right;
 		position: absolute;
-		bottom: -5px;
 		right: 15px;
+		padding: 1em;
+		border-radius: 5px;
+		background: rgba(255, 255, 255, 0.75);
+		-webkit-backdrop-filter: blur(3px);
 	}
 
 	#data_overage_charges_row {
