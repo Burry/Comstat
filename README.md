@@ -7,12 +7,12 @@ Comcast forces you to go through a pretty crappy login process until they finall
 
 Features
 -------
-    - Log in only once
-    - Auto-loads usage data in background so you don't have to wait to check it
-    - Tracks usage for the month to display a nice graph
-    - Slick, mobile-friendly UI
-    - Ideal for proxying through something like nginx and hosting for your family/roommates
-    - Planned: add detailed statistics and use predictions
+- Log in only once
+- Auto-loads usage data in background so you don't have to wait to check it
+- Tracks usage for the month to display a nice graph
+- Slick, mobile-friendly UI
+- Ideal for proxying through something like nginx and hosting for your family/roommates
+- Planned: add detailed statistics and use predictions
 
 Preview
 -------
