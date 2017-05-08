@@ -23,7 +23,9 @@ Installation
 Requires Node.js and Python 3 with the requests library.
 1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
 2. Inside the Comstat directory, run `sudo npm install` to install node dependencies.
-3. Create the database directory in your root folder with `sudo mkdir -p /data/db && sudo chown -R $USER /data/db`. If you'd like, you can use a different directory, but then you must ensure that Mongo has permissions to it, and you must update the path in the pre- and post- start scripts in package.json.
+3. Create the database directory in your root folder with `sudo mkdir -p /data/db && sudo chown -R $USER /data/db`.
+
+If you'd like, you can use a different directory, but then you must ensure that Mongo has permissions to it, and you must update the path in the pre- and post- start scripts in package.json, unless you wish to start Mongo separately from Comstat.
 
 Usage
 -------
