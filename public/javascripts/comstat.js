@@ -76,8 +76,6 @@ function setChartSize() {
 }
 
 $(document).ready(function() {
-    requestComcastQuery()
-
 	var cumulativeUse = [];
 	var recordedDate = j = dailyUsageData[0]._id - 2;
 	for (var i = 0; i < recordedDate; i++) {
