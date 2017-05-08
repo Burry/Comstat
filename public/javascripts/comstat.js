@@ -88,7 +88,7 @@ function setChartSize() {
 
 $(document).ready(function() {
 	var cumulativeUse = [];
-	var recordedDate = j = dailyUsageData[0]._id - 2;
+	var recordedDate = j = dailyUsageData[0]._id - 1;
 	for (var i = 0; i < recordedDate; i++) {
 		cumulativeUse[i] = 0;
 		if (dailyUsageData[i]) cumulativeUse[j] = dailyUsageData[i].totalUsed;
