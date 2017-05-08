@@ -1,5 +1,6 @@
-
-![Logo](public/images/android-chrome-192x192.png)
+<p align="center">
+  <img src="public/images/apple-touch-icon.png?raw=true" alt="Logo" />
+</p>
 
 Comstat
 -------
@@ -16,7 +17,9 @@ Features
 
 Preview
 -------
-![Screenshot](Screenshot.png?raw=true)
+<p align="center">
+  <img src="Screenshot.png?raw=true" alt="Screenshot" />
+</p>
 
 Installation
 -------
