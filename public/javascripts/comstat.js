@@ -1,5 +1,11 @@
 var socket = io.connect();
 
+$("#refresh").click(function() {
+    socket.emit('requestComcastQuery', null, function(data) {
+        updateStats(data);
+    });
+});
+
 socket.on('notifyComcastQuery', function() {
     $(".loader").show();
     $(".fa-refresh").addClass("fa-spin");
@@ -141,16 +147,6 @@ $(document).ready(function() {
     });
 });
 
-function requestComcastQuery() {
-    socket.emit('requestComcastQuery', null, function(data) {
-        updateStats(data);
-    });
-}
-
 $(window).resize(function() {
 	setChartSize();
-});
-
-$("#refresh").click(function() {
-    requestComcastQuery();
 });
