@@ -63,16 +63,6 @@ function updateStats(data) {
     $("#days_remaining").html(daysUntilReset);
 }
 
-function gimme30() {
-    var array = [];
-    var month = moment().month() + 1;
-	var daysInMonth = moment().daysInMonth();
-    for (var day = 1; day <= daysInMonth; day++) {
-        array.push(month + '/' + day)
-    }
-    return array;
-}
-
 function setChartSize() {
 	var size = [$(".jumbotron-fluid .container").css("width"), $(".jumbotron-fluid").css("height")]
 	if ($(window).width() >= 576) size[0] = parseInt(size[0].slice(0, -2)) - 30 + 'px';
@@ -83,27 +73,32 @@ function setChartSize() {
 }
 
 $(document).ready(function() {
-	var cumulativeUse = [];
-	var firstRecordDate = dailyUsageData[0]._id;
-    var lastRecordDate = dailyUsageData[dailyUsageData.length - 1]._id;
+	var cumulativeUse = {
+        labels: [],
+        data: []
+    };
+    var currentMonth = dailyUsageData[0]._id.m;
+	var firstRecordDate = dailyUsageData[0]._id.d;
+    var lastRecordDate = dailyUsageData[dailyUsageData.length - 1]._id.d;
     var dataIndex = firstRecordDate - 1;
 
-	for (var i = 0; i <= lastRecordDate; i++) {
-        if (i < firstRecordDate-1) cumulativeUse[i] = 0;
+	for (var i = 0; i < lastRecordDate; i++) {
+        cumulativeUse.labels[i] = currentMonth + '/' + dailyUsageData[i]._id.d;
+        if (i < firstRecordDate-1) cumulativeUse.data[i] = 0;
         if (dailyUsageData[i])
-            cumulativeUse[dataIndex] = dailyUsageData[i].totalUsed;
+            cumulativeUse.data[dataIndex] = dailyUsageData[i].totalUsed;
         dataIndex++;
     }
 
     var data = {
-        labels: gimme30(),
+        labels: cumulativeUse.labels,
         datasets: [{
             type: 'line',
             fill: true,
             backgroundColor: 'rgb(215, 19, 40)',
             borderColor: 'rgba(0, 0, 0, 0)',
             borderWidth: 0,
-            data: cumulativeUse
+            data: cumulativeUse.data
         }]
     };
 
