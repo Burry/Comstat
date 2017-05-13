@@ -23,7 +23,7 @@ Preview
 
 Installation
 -------
-Requires [Node.js](https://nodejs.org/en/download/), [MongoDB](https://docs.mongodb.com/manual/installation/), and [Python 3](https://www.python.org/downloads/) with the [requests](http://docs.python-requests.org/en/master/user/install/) library. Follow those links to install them if you haven't already.
+Requires [Node.js](https://nodejs.org/en/download/), [MongoDB 3.2](https://docs.mongodb.com/manual/installation/) or later, and [Python 3](https://www.python.org/downloads/) with the [requests](http://docs.python-requests.org/en/master/user/install/) library. Follow those links to install them if you haven't already.
 
 1. [Download](https://github.com/Burry/Comstat/archive/master.zip) the repo or run `git clone https://github.com/Burry/Comstat.git`
 2. Create the database directory in your root folder with `sudo mkdir -p /data/db && sudo chown -R $USER /data/db`

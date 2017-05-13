@@ -81,10 +81,15 @@ $(document).ready(function() {
 	var firstRecordDate = dailyUsageData[0]._id.d;
     var lastRecordDate = dailyUsageData[dailyUsageData.length - 1]._id.d;
     var dataIndex = firstRecordDate - 1;
+    var lastOfMonth = moment().endOf('month').date();
+
+    for (var i = 1; i <= lastOfMonth; i++) {
+        cumulativeUse.labels[i-1] = currentMonth + '/' + i;
+    }
 
 	for (var i = 0; i < lastRecordDate; i++) {
-        cumulativeUse.labels[i] = currentMonth + '/' + dailyUsageData[i]._id.d;
-        if (i < firstRecordDate-1) cumulativeUse.data[i] = 0;
+        if (i < firstRecordDate-1)
+            cumulativeUse.data[i] = 0;
         if (dailyUsageData[i])
             cumulativeUse.data[dataIndex] = dailyUsageData[i].totalUsed;
         dataIndex++;
